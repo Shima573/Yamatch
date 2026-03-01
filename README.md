@@ -230,3 +230,7 @@
 | 画像管理         | Cloudinary         | -                | 登山記録の写真アップロード・管理を外部ストレージで効率化するため。 |
 | インフラ         | Render             | -                | Rails 7.2環境をデプロイしやすく、コストを抑えた運用が可能なため。 |
 | 開発環境         | Docker             | -                | チーム開発や本番環境との整合性を保ち、環境構築を容易にするため。 |
+
+## 設計書
+### 画面遷移図
+https://www.figma.com/design/EgmtVvZhOb0NGEzBbFnz9c/%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?node-id=0-1&t=Qjos8FBqg8NYfnPT-1
