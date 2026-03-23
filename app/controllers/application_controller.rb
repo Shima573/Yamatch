@@ -2,6 +2,11 @@ class ApplicationController < ActionController::Base
   # デフォルトで全ページをログイン必須にする
   before_action :authenticate_user!
 
+  # ログイン後の遷移先を指定するメソッド
+  def after_sign_in_path_for(resource)
+    profile_path(resource) # resource はログインしたユーザーオブジェクト（current_userと同じ）
+  end
+
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
 

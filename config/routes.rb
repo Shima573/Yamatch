@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # get "profiles/show"
   # get "diagnoses/new"
   # get "diagnoses/create"
   # get "diagnoses/show"
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
 
   root "pages#top"
   resources :diagnoses, only: [ :new, :create, :show ]
+  resources :profiles, only: [ :show ]
 
   # Deviseのルーティング（これが必須）
   devise_for :users
