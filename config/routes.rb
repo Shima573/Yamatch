@@ -19,5 +19,4 @@ Rails.application.routes.draw do
   resources :diagnoses, only: [ :new, :create, :show ]
   resources :profiles, only: [ :show ]
   resources :mountains, only: [ :index, :show ]
-
 end
