@@ -1,35 +1,140 @@
-<div class="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] bg-base-100 px-4 text-center">
-  <div class="max-w-2xl">
-    <h1 class="text-5xl font-bold text-primary mb-6">
-      やまッチ
-    </h1>
-    <p class="text-xl mb-8 leading-relaxed">
-      登山相性診断＆登山ログアプリ<br>
-      あなたにぴったりの登山仲間と、最高の景色を見つけに行こう。
-    </p>
+<div class="min-h-screen">
+    <section class="relative min-h-screen flex items-center overflow-hidden -mt-16">
+        <!-- bg gradient -->
+        <div class="absolute inset-0 "
+            style="background: linear-gradient(160deg, #81a78c 0%, #6B8F71 35%, #839b8a 60%, #8FAF8B 100%)">
+        </div>
+        <!-- SVG mountains -->
+        <svg class="absolute bottom-0 left-0 right-0 w-full" viewBox="0 0 1440 500" preserveAspectRatio="xMidYMax slice"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M0,400 L180,180 L320,280 L500,100 L680,250 L820,140 L1000,260 L1180,80 L1360,200 L1440,160 L1440,500 L0,500Z"
+                fill="rgba(42,77,56,.5)" />
+            <path
+                d="M0,430 L120,280 L260,360 L400,200 L560,320 L700,220 L880,350 L1020,180 L1200,300 L1340,240 L1440,280 L1440,500 L0,500Z"
+                fill="rgba(61,107,79,.6)" />
+            <path
+                d="M0,460 L100,380 L220,430 L360,350 L500,400 L640,340 L800,420 L940,360 L1100,400 L1260,350 L1440,380 L1440,500 L0,500Z"
+                fill="rgba(42,77,56,.8)" />
+            <path d="M0,480 L1440,480 L1440,500 L0,500Z" fill="rgba(30,40,32,.9)" />
+        </svg>
+        <!-- mist bottom -->
+        <div class="absolute bottom-0 left-0 right-0 h-72 pointer-events-none"
+            style="background:linear-gradient(to top,rgba(247,245,240,.25),transparent)"></div>
+        <!-- mist mid -->
+        <div class="absolute pointer-events-none"
+            style="top:30%;left:-10%;right:-10%;height:200px;background:radial-gradient(ellipse,rgba(200,216,204,.12),transparent 70%)">
+        </div>
 
-    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <button class="btn btn-primary btn-lg">
-        相性診断をはじめる
-      </button>
-      <button class="btn btn-outline btn-secondary btn-lg">
-        登山ログを見る
-      </button>
-    </div>
+        <!-- hero content -->
+        <div class="relative z-10 px-6 md:px-16 pt-24 max-w-2xl animate-hero-0">
+            <!-- eyebrow -->
+            <div class="animate-hero-1 inline-flex items-center gap-2 text-xs text-primary-70 font-bold tracking-widest uppercase mb-6">
+                <span class="block w-7 h-px bg-primary-70"></span>
+                登山マッチングアプリ
+            </div>
 
-    <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="p-6 bg-white rounded-xl shadow-sm border border-gray-100">
-        <h3 class="font-bold text-lg mb-2">🏔 相性診断</h3>
-        <p class="text-sm text-gray-600">レベルや好みに合わせた最適なルートを提案</p>
-      </div>
-      <div class="p-6 bg-white rounded-xl shadow-sm border border-gray-100">
-        <h3 class="font-bold text-lg mb-2">📸 登山ログ</h3>
-        <p class="text-sm text-gray-600">あなたの登頂記録を美しく残せます</p>
-      </div>
-      <div class="p-6 bg-white rounded-xl shadow-sm border border-gray-100">
-        <h3 class="font-bold text-lg mb-2">🤝 仲間探し</h3>
-        <p class="text-sm text-gray-600">同じペースで登れる仲間とつながる</p>
-      </div>
-    </div>
-  </div>
+            <!-- title -->
+            <h1 class="animate-hero-2 font-mincho font-black text-primary-20 text-[clamp(36px,5.5vw,64px)] leading-snug mb-6"
+                >
+                あなたに合う山が、<br>
+                <span class="text-primary-70">きっとある。</span>
+            </h1>
+
+            <!-- subtitle -->
+            <p class="animate-hero-3 text-base leading-loose font-light text-primary-20 mb-12 max-w-lg"
+>
+                いくつかの質問に答えるだけで、今の体力に合った山を提案。<br class="hidden md:block">
+                「初心者向け」の曖昧な基準に迷わず、安心して一歩を踏み出せる。
+            </p>
+
+            <!-- CTA buttons -->
+            <div class="animate-hero-3 flex flex-wrap items-center gap-4">
+                <%= link_to new_diagnosis_path, class: "group inline-flex items-center gap-2.5 bg-primary-20 text-primary-60 font-bold text-sm md:text-base px-7 py-4 rounded-full shadow-xl transition-all hover:-translate-y-1 hover:shadow-2xl hover:bg-forest-light tracking-wide" do %>
+                  相性診断をする
+                  <span class="transition-transform group-hover:translate-x-1">→</span>
+                <% end %>
+                <a href="#how"
+                    class="inline-flex items-center gap-2 font-medium text-sm text-primary-20 px-7 py-4 rounded-full border border-primary-90/40 transition-all hover:bg-primary-20/10 tracking-wide">
+                    使い方を見る ↓
+                </a>
+            </div>
+        </div>
+
+        <!-- scroll hint -->
+        <div class="scroll-hint absolute bottom-9 left-1/2 flex flex-col items-center gap-2 z-10 text-primary-20/60">
+            <span class="text-[10px] font-bold tracking-widest uppercase">Scroll</span>
+            <svg width="16" height="20" viewBox="0 0 16 20" fill="none">
+                <path d="M8 0v16M2 10l6 6 6-6" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </div>
+    </section>
+
+    <section class="bg-primary-30 py-24 md:py-28 px-6 md:px-10">
+        <div class="max-w-4xl mx-auto">
+            <p class="inline-flex items-center gap-2  text-xs font-bold tracking-widest uppercase text-primary-60 mb-4"><span class="block w-7 h-px bg-primary-60"></span>こんな経験はありませんか？</p>
+            <h2 class=" delay-1 font-mincho font-black text-ink text-[clamp(26px,3.5vw,42px)] leading-snug mb-5">「初心者向け」だけでは<br>
+                <span class="u-accent">自分に合うか判断できない</span>
+            </h2>
+            <p class=" delay-2 text-base leading-loose font-light text-primary-50 mb-14 max-w-xl">
+                登録情報サイトを調べれば調べるほど、選択肢が増えて迷いがます。<br class="hidden md:block">
+                体力の目安がわからないまま、結局行くことを諦めてしまう。</p>
+            <div class="grid md:grid-cols-3 gap-5">
+                <% card_items = [
+                { title: "選択ミスの不安", text: "「もし体力が持たなかったら」という不安で、なかなか山を決められない。", icon: "😰"},
+                { title: "情報過多で迷子", text: "「初心者向け」の山が無数にあり、自分に本当に合うものが選べない。", icon: "🔍"},
+                { title: "自分基準がない", text: "ケーブルカー前提のコースも「初心者向け」。自分の体力との比較ができない。", icon: "📏"},
+              ]%>
+                <% card_items.each do |item| %>
+                <div
+                    class="relative bg-primary-20 border border-primary-40 border-t-4 rounded-2xl p-7 overflow-hidden transition-all hover:-translate-y-1 hover:shadow-lg pain-bar">
+                    <p class="text-3xl mb-4"><%= item[:icon] %></p>
+                    <p class="font-bold text-base text-ink mb-2"><%= item[:title] %></p>
+                    <p class="text-sm leading-relaxed text-primary-60"><%= item[:text] %></p>
+                </div>
+                <% end %>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-primary-200 py-24 md:py-28 px-6 md:px-10 overflow-hidden" id="how">
+        <div class="z-10 max-w-4xl mx-auto">
+            <p class="inline-flex items-center gap-2 text-xs text-primary-70 font-bold tracking-widest uppercase mb-4"><span class="block w-7 h-px bg-primary-70"></span>かんたん3ステップ</p>
+            <h2 class="font-mincho font-black text-primary-20 text-3xl text-[clamp(26px,4vw,48px)] leading-snug mb-16">5分で、あなたにおすすめの山が見つかる</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <% step_items = [
+                { number: "01", icon: "📋", title: "相性診断に答える", text: "運動習慣・持久力・登山経験など、5つの簡単な質問に答えるだけ。"},
+                { number: "02", icon: "🏔️", title: "あなたに合う山が提案される", text: "診断結果をもとに、体力・技術レベルに合わせた山を3候補ご提案。"},
+                { number: "03", icon: "🎒", title: "登山の計画をイメージする", text: "山の難易度や特徴を確認し、今のあなたに最適な一歩を。お気に入り登録しておけば、登りたい山の候補としていつでも見返せます。"},
+              ]%>
+                <% step_items.each do |item| %>
+                <div class="bg-primary-20/10 border border-primary-20/[.08] rounded-2xl p-8 hover:bg-primary-20/[.08] transition-all">
+                    <p class="font-mincho font-black text-[52px] text-primary-40 leading-none mb-4"><%=item[:number]%></p>
+                    <p class="text-3xl mb-4"><%=item[:icon]%></p>
+                    <p class="font-bold text-primary-20 text-base mb-2.5"><%= item[:title] %></p>
+                    <p class="text-sm leading-relaxed text-primary-20/50"><%=item[:text]%></p>
+                </div>
+                <% end %>
+            </div>
+        </div>
+    </section>
+
+    <section class="relative bg-primary-30 py-24 md:py-28 px-6 overflow-hidden text-center">
+        <div
+            class="absolute inset-0 flex items-center justify-center text-[320px] opacity-[0.05] pointer-events-none select-none leading-none">
+            🏔️</div>
+        <div class="relative z-10 max-w-2xl mx-auto">
+            <h2 class=" font-mincho font-black text-ink text-[clamp(26px,4vw,48px)] leading-snug mb-5">
+                あなたの「はじめての山」を<br>見つけませんか？
+            </h2>
+            <p class="delay-1 text-base font-light leading-loose text-primary-50 mb-12">
+                5問に答えるだけで、今の体力に合う山がわかります。
+            </p>
+            <%= link_to new_diagnosis_path, class: "delay-2 inline-flex items-center gap-3 bg-primary-50 text-primary-20 font-bold text-base px-10 py-5 rounded-full shadow-xl shadow-forest/30 transition-all hover:bg-forest-dark hover:-translate-y-1 hover:shadow-2xl tracking-wide" do %>
+            🏔️ 相性診断をはじめる
+            <% end %>
+            <p class="delay-2 text-xs text-primary-50 mt-5">アカウント登録はあとからでもOK</p>
+        </div>
+    </section>
 </div>

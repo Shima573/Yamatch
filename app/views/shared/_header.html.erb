@@ -1,11 +1,11 @@
-<header id="header" class="scrolled flex fixed top-0 left-0 w-full h-16 z-50 items-center justify-between p-8 bg-[linear-gradient(to_bottom,var(--color-primary-100),var(--color-primary-200))] text-primary-20">
+<header id="header" data-controller="header" class="<%= current_page?(root_path) ? 'is-top' : '' %>">
   <%= link_to (user_signed_in? ? profile_path(current_user) : root_path), class: "logo" do %>
-  <span class="text-xl text-primary-30 font-mincho font-black">
+  <span class="text-xl font-mincho font-black">
     やま<em class="text-primary-300">ッチ</em>
   </span>
   <% end %>
 
-  <div class="nav-links flex items-center gap-3">
+  <div class="nav-links flex justify-between items-center gap-3">
     <% if user_signed_in? %>
       <%= render 'shared/sub_nav'%>
       <%= link_to edit_user_registration_path, class: "user-icon-link" do %>
@@ -16,13 +16,9 @@
                   destroy_user_session_path,
                   data: { turbo_method: :delete },
                   class: "logout-link border border-primary-20 rounded-3xl px-4 py-1 text-primary-20 font-black hover:text-primary-50 hover:bg-primary-20 transition-all" %>
-
     <% else %>
-      <a href="#" class="nav-link">使い方</a>
-      <a href="#" class="nav-link">機能</a>
-
       <%= link_to "ログイン", new_user_session_path, class: "nav-link" %>
-      <%= link_to "相性診断をする", new_diagnosis_path, class: "nav-cta bg-primary-20 text-primary-60 rounded-3xl px-4 py-1 transition-transform duration-300 hover:-translate-y-1" %>
+      <%= link_to "相性診断をする", new_diagnosis_path, class: "nav-cta font-blok rounded-3xl px-4 py-1 transition-transform duration-300 hover:-translate-y-1 hidden md:block" %>
     <% end %>
   </div>
 </header>
