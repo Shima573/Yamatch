@@ -3,7 +3,7 @@
 
 @theme {
   --color-primary-10: #F7EDD6;
-  --color-primary-20: #FDFCF8;
+  --color-primary-20: #FDFCF8; /*文字の基本カラー*/
   --color-primary-30: #F7F5F0;
   --color-primary-40: #2A4D38;
   --color-primary-50: #5A8A6A;
@@ -22,13 +22,52 @@
   --font-mincho: 'Shippori Mincho B1', serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
 
 /* header・footer */
 .nav-link{
-  @apply px-4 py-1
+  @apply px-2 py-1 md:px-4
 }
 .nav-link:hover{
-  @apply bg-primary-20/30 px-4 rounded-3xl
+  @apply bg-primary-20/30 px-2 rounded-3xl md:px-4
+}
+
+#header {
+  @apply fixed top-0 left-0 w-full h-16 z-50 flex items-center justify-between p-8 text-primary-20 transition-all duration-300;
+  background: linear-gradient(to bottom, var(--color-primary-100), var(--color-primary-200));
+}
+
+#header .nav-cta{
+  @apply bg-primary-20 text-primary-50 transition-all duration-300;
+}
+
+/* トップページ初期 */
+#header.is-top {
+  background: transparent;
+}
+
+/* スクロール後 */
+#header.is-top.is-scrolled {
+  @apply text-primary-60 bg-primary-30/95;
+}
+#header.is-top.is-scrolled .nav-cta {
+  @apply bg-primary-50 text-primary-20 ;
+}
+#header.is-top.is-scrolled .nav-link:hover {
+  @apply bg-primary-50/30 px-4 rounded-3xl
+}
+
+/* スクロール矢印 */
+@keyframes float {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(10px); }
+  100% { transform: translateY(0); }
+}
+
+.scroll-hint {
+  animation: float 2s ease-in-out infinite;
 }
 
 /* アイコンナビ */
