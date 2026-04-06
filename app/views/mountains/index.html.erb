@@ -2,8 +2,9 @@
     <div class="mx-auto px-4 pt-8 pb-8">
         <!-- セクション①：メイン「あなたにおすすめ」 -->
         <section class="max-w-xl mx-auto py-8 px-2 mb-10 bg-primary-60 rounded-3xl relative">
-            <svg class="absolute inset-0 w-full h-full opacity-[0.07] pointer-events-none" viewBox="0 0 600 160" preserveAspectRatio="xMidYMid slice">
-            <path d="M0,100 L120,30 L220,80 L320,10 L420,60 L520,20 L600,50 L600,160 L0,160Z"  fill="white"/>
+            <svg class="absolute inset-0 w-full h-full opacity-[0.07] pointer-events-none" viewBox="0 0 600 160"
+                preserveAspectRatio="xMidYMid slice">
+                <path d="M0,100 L120,30 L220,80 L320,10 L420,60 L520,20 L600,50 L600,160 L0,160Z" fill="white" />
             </svg>
             <div class="flex items-center justify-between mb-3 px-4">
                 <div>
@@ -20,7 +21,8 @@
             <% if  @has_diagnosis%>
             <div class="flex flex-col gap-8 max-w-xl mx-auto ">
                 <% @recommended_mountains.each_with_index do |mountain, index| %>
-                <div class="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col border-2 border-primary-50 relative">
+                <div
+                    class="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col border-2 border-primary-50 relative">
                     <div class="relative h-56 overflow-hidden">
                         <img src="<%= mountain.image_url %>" alt="<%= mountain.name %>"
                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
@@ -28,8 +30,8 @@
                         </div>
                         <div class="absolute bottom-4 left-4 text-white">
                             <h3 class="text-xl font-bold font-mincho"><%= mountain.name %></h3>
-                            <span
-                                class="text-xs font-bold font-mincho text-primary-80">📍 <%= mountain.prefecture %></span>
+                            <span class="text-xs font-bold font-mincho text-primary-80">📍
+                                <%= mountain.prefecture %></span>
                         </div>
                     </div>
 
@@ -37,11 +39,13 @@
                         <div class="grid grid-cols-2 gap-4 mb-6">
                             <div class="bg-slate-50 p-3 rounded-2xl text-center">
                                 <span class="block text-[12px] text-slate-400 font-bold uppercase">標高</span>
-                                <span class="text-base font-bold font-mincho text-primary-40"><%= mountain.elevation %>m</span>
+                                <span
+                                    class="text-base font-bold font-mincho text-primary-40"><%= mountain.elevation %>m</span>
                             </div>
                             <div class="bg-slate-50 p-3 rounded-2xl text-center">
                                 <span class="block text-[12px] text-slate-400 font-bold uppercase">難易度</span>
-                                <span class="text-base font-bold font-mincho text-primary-40">体 <%= mountain.raw_physical_grade %> /
+                                <span class="text-base font-bold font-mincho text-primary-40">体
+                                    <%= mountain.raw_physical_grade %> /
                                     技 <%= mountain.raw_technical_grade %></span>
                             </div>
                         </div>
@@ -66,7 +70,11 @@
                 <% end %>
             </div>
             <%else%>
-            先に診断をしてください
+            <div class="cover">
+                <div class="box text-center p-12 font-bold rounded-3xl">
+                    相性診断後におすすめの山が表示されます
+                </div>
+            </div>
             <% end %>
         </div>
     </div>
