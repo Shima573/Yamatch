@@ -1,6 +1,6 @@
 <%# 1. アイコンナビゲーション（ヘッダー直下） %>
   <nav class="">
-    <div class="flex">
+    <div class="flex flex-col md:flex-row">
       <% nav_items = [
         { name: "マイページ", path: profile_path(current_user), icon: "👤"},
         { name: "お気に入り", path: "#", icon: "⭐"},
