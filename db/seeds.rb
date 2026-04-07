@@ -83,7 +83,7 @@ mountains_data = [
 mountains_data.each do |data|
   # normalized_... スコアを明示的に書かなくても、
   # 保存時(create!)にモデルの before_save が動いて自動計算されます
-  mountain = Mountain.find_or_initialize_by(name:data[:name])
+  mountain = Mountain.find_or_initialize_by(name: data[:name])
   mountain.assign_attributes(data)
   mountain.save!
 end
