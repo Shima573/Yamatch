@@ -28,8 +28,8 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <% @recommended_mountains.each do |mountain| %>
             <div class="box rounded-2xl">
-                <div class="text-center">
-                    <img src="<%= mountain.image_url %>" alt="<%= mountain.name %>" class="">
+                <div class="text-center aspect-[4/3]">
+                    <%= image_tag mountain_image(mountain), class: "w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 rounded-t-2xl" %>
                     <div class=""></div>
                     <div class="p-2">
                         <span
@@ -81,12 +81,12 @@
             <% else %>
             <div class="">
                 <div class="box p-4">
-                    <h3 class="pb-2 text-2xl text-black">診断結果を保存して、山の難易度と見比べてみませんか？</h3>
+                    <h3 class="pb-2 md:text-2xl text-black">診断結果を保存して、山の難易度と見比べてみませんか？</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-center px-2">
-                        <%= link_to new_user_session_path, class: 'bg-primary-20 rounded-2xl px-4 py-1 w-90 text-black hover:bg-primary-500 hover:text-primary-20 duration-300' do %>
+                        <%= link_to new_user_session_path, class: 'bg-primary-20 rounded-2xl px-4 py-1 bd:w-90 text-black hover:bg-primary-500 hover:text-primary-20 duration-300' do %>
                         <span>ログイン</span>
                         <% end %>
-                        <%= link_to new_user_registration_path, class: 'bg-primary-20 rounded-2xl px-4 py-1 w-90 text-black hover:bg-primary-500 hover:text-primary-20 duration-300' do %>
+                        <%= link_to new_user_registration_path, class: 'bg-primary-20 rounded-2xl px-4 py-1 md:w-90 text-black hover:bg-primary-500 hover:text-primary-20 duration-300' do %>
                         <span>新規登録</span>
                         <% end %>
                     </div>
