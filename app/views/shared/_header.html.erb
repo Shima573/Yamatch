@@ -5,6 +5,7 @@
     </span>
     <% end %>
 
+    <% if user_signed_in? %>
     <button class="md:hidden" data-action="click->header#toggle">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
             class="size-7 hamburger">
@@ -17,20 +18,25 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
         </svg>
     </button>
+    <% end %>
 
+    <% if user_signed_in? %>
+    <%# ログイン後 %>
     <div class="hidden md:flex flex-col md:flex-row absolute md:static top-full left-0 nav-links justify-between md:items-center gap-3 w-full md:w-auto"
         data-header-target="menu">
-        <% if user_signed_in? %>
         <%= render 'shared/sub_nav'%>
 
         <%= link_to "ログアウト",
-                  destroy_user_session_path,
-                  data: { turbo_method: :delete },
-                  class: "md:border md:border-primary-20 md:rounded-3xl px-4 md:py-1 md:text-primary-20 font-black hover:text-primary-50 hover:bg-primary-20 transition-all
-                  block w-full md:w-auto border-3 border-double border-primary-700 bg-primary-30/90 font-mincho px-4 py-4 text-primary-90 md:bg-transparent" %>
-        <% else %>
+                destroy_user_session_path,
+                data: { turbo_method: :delete },
+                class: "md:border md:border-primary-20 md:rounded-3xl px-4 md:py-1 md:text-primary-20 font-black hover:text-primary-50 hover:bg-primary-20 transition-all
+                block w-full md:w-auto border-3 border-double border-primary-700 bg-primary-30/90 font-mincho px-4 py-4 text-primary-90 md:bg-transparent" %>
+    </div>
+    <% else %>
+    <%# ログイン前 %>
+    <div class=" md:flex flex-col md:flex-row md:static nav-links justify-between md:items-center gap-3 md:w-auto">
         <%= link_to "ログイン", new_user_session_path, class: "nav-link" %>
         <%= link_to "相性診断をする", new_diagnosis_path, class: "nav-cta font-blok rounded-3xl px-4 py-1 transition-transform duration-300 hover:-translate-y-1 hidden md:block" %>
-        <% end %>
     </div>
+    <% end %>
 </header>
