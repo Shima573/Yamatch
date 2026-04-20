@@ -48,14 +48,6 @@ html {
   @apply bg-primary-20 text-primary-50 transition-all duration-300;
 }
 
-.is-open .hamburger {
-  display: none;
-}
-
-.is-open .close {
-  display: block;
-}
-
 /* トップページ初期 */
 #header.is-top {
   background: transparent;
@@ -85,12 +77,11 @@ html {
 
 /* アイコンナビ */
 .icon-nav{
-  @apply md:items-center md:py-2 md:px-4 md:border-b-2 md:border-transparent md:text-primary-20 md:bg-transparent
-  border-3 border-double border-primary-700 bg-primary-30/90 font-mincho px-4 py-4 text-primary-90
+  @apply items-center py-2 px-4 border-b-2 border-transparent text-primary-20
 }
 
 .active {
-  @apply md:bg-primary-20/50 md:text-primary-60 md:rounded-3xl
+  @apply bg-primary-20/50 text-primary-60 rounded-3xl
 }
 
 /* 山の詳細 */

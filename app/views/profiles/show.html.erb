@@ -15,8 +15,20 @@
             <%= @user.name %>
         </div>
 
+        <div class="flex font-mincho py-2 w-auto">
+            <%= image_tag "sample/home.svg", class: "w-6 h-6" %>
+            <p class="">
+                お住まい：
+            </p>
+            <% if @user.prefecture.present? %>
+                <%= @user.prefecture %>
+            <% else %>
+                <p>プロフィール編集からお住まいを更新してください</p>
+            <% end %>
+        </div>
+
         <%# 編集 %>
-        <div class="box w-40 p-2 text-center">
+        <div class="box w-40 p-2 text-center rounded-3xl">
             <%= link_to "プロフィール編集", edit_profile_path, class: "btn" %>
         </div>
 

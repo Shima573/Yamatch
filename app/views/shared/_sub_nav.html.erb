@@ -2,18 +2,20 @@
   <nav class="">
     <div class="flex flex-col md:flex-row">
       <% nav_items = [
-        { name: "マイページ", path: profile_path(current_user), icon: "👤"},
-        { name: "お気に入り", path: "#", icon: "⭐"},
-        { name: "診断", path: new_diagnosis_path, icon: "📋"},
-        { name: "おすすめの山", path: mountains_path, icon: "🏔️"},
-        { name: "記録", path: "#", icon: "📊"},
+        { name: "マイページ", path: profile_path(current_user), icon: "sample/my.svg"},
+        { name: "お気に入り", path: "#", icon: "sample/favorlte.svg"},
+        { name: "診断", path: new_diagnosis_path, icon: "sample/diagnoses.svg"},
+        { name: "おすすめの山", path: mountains_path, icon: "sample/mountain.svg"},
+        { name: "記録", path: "#", icon: "sample/record.svg"},
         # { name: "", path: , icon: ""}追加用,
       ]%>
 
       <% nav_items.each do |item| %>
         <%= link_to item[:path], class: "icon-nav #{current_page?(item[:path]) ? 'active' : ''} " do %>
-          <span class="text-base mb-1 "><%= item[:icon] %></span>
+        <div class="flex items-center gap-1">
+          <span class="text-base mb-1 pl-1"><%= image_tag item[:icon], class: "w-5 h-5" %></span>
           <span class="text-[12px] font-bold "><%= item[:name] %></span>
+        </div>
         <% end %>
       <% end %>
     </div>
