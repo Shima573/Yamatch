@@ -17,9 +17,7 @@
 
         <div class="pb-4">
             <p class="text-lg pb-2"><%= f.label :prefecture %></p>
-            <div class="">
-                <%= f.select :prefecture, prefectures %>
-            </div>
+            <%= f.select :prefecture, prefectures, {}, {class: "py-2 pl-2 border-2 border-primary-100 rounded-lg bg-primary-30 w-50 cursor-pointer"} %>
         </div>
 
         <div class="">

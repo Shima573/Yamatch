@@ -8,6 +8,7 @@ ja:
         password_confirmation: "確認用パスワード"
         remember_me: "ログインを記憶"
         avatar: "アイコン画像"
+        prefecture: "居住地の都道府県"
   devise:
     confirmations:
       confirmed: "メールアドレスの確認が完了しました。"
