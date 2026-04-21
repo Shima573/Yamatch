@@ -19,4 +19,8 @@ Rails.application.routes.draw do
   resources :diagnoses, only: [ :new, :create, :show ]
   resource :profile, only: [ :show, :edit, :update ]
   resources :mountains, only: [ :index, :show ]
+
+  resources :mountains do
+    resource :favorite, only: [ :create, :destroy ]
+  end
 end
