@@ -3,6 +3,7 @@ class MountainsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @favorite_ids = current_user.favorites.pluck(:mountain_id)
     @has_diagnosis = current_user.diagnoses.exists?
 
     if @has_diagnosis

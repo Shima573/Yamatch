@@ -23,4 +23,5 @@ Rails.application.routes.draw do
   resources :mountains do
     resource :favorite, only: [ :create, :destroy ]
   end
+  resources :favorites, only: [ :index ]
 end

@@ -1,0 +1,9 @@
+<div class="">
+    <% if favorite_ids.include?(mountain.id) %>
+    <!-- 登録済み -->
+    <%= button_to "❤️", mountain_favorite_path(mountain), method: :delete, class: 'link' %>
+    <% else %>
+    <!-- 未登録 -->
+    <%= button_to "🩶", mountain_favorite_path(mountain), class: 'link' %>
+    <% end %>
+</div>

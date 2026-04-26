@@ -1,0 +1,3 @@
+<%= turbo_stream.update "favorite_button_#{@mountain.id}" do %>
+  <%= render "shared/favorites_button", mountain: @mountain, favorite_ids: @favorite_ids %>
+<% end %>
