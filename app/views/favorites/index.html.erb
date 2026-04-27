@@ -1,0 +1,64 @@
+<div class="min-h-screen">
+    <div class="p-5">
+        <div class="favorite_header py-6">
+            <h1 class=" text-3xl">お気に入り一覧</h1>
+        </div>
+        <% if @favorite_mountains.any? %>
+        <div class="grid md:grid-cols-3 gap-6">
+            <% @favorite_mountains.each do |mountain| %>
+            <div class="border border-primary-300/60 shadow-sm rounded-3xl overflow-hidden font-mincho">
+                <!-- 上：写真 -->
+                <div class="">
+                    <%= image_tag mountain_image(mountain), class: "w-full h-70 object-cover" %>
+                </div>
+
+                <div class="p-4 bg-primary-1100/90">
+                    <!-- 中：情報 -->
+                    <div class="flex flex-col gap-2 pb-4">
+                        <!-- 名前 -->
+                        <div class="flex items-center text-2xl font-semibold">
+                            <%= image_tag "sample/placeholder-mountain.jpg", class: "w-10 h-11"  %>
+                            <%= mountain.name %>
+                        </div>
+                        <!-- 標高・距離・都道府県 -->
+                        <div class="box2 flex flex-col items-center">
+                            <span class="text-xs text-primary-900">所在地</span>
+                            <%= mountain.prefecture %>
+                        </div>
+                        <div class="box2 flex flex-col items-center">
+                            <span class="text-xs text-primary-900">標高</span>
+                            <%= mountain.elevation %>m
+                        </div>
+                        <div class="box2 text-sm">
+                            <%= current_user.prefecture %>中心部から約<%= mountain.distance_from(current_user)&.round %>km
+                        </div>
+                    </div>
+
+                    <!-- 下：ボタン -->
+                    <div class="grid grid-cols-5 md:grid-cols-8 gap-2">
+                        <!-- 詳細 -->
+                        <%= link_to mountain_path(mountain), class: "group/btn relative inline-flex items-center justify-center w-full px-6 py-3 font-bold text-slate-700 transition-all duration-200 bg-white border-2 border-slate-200 rounded-xl
+                        shadow-sm hover:bg-primary-500 hover:text-white hover:border-primary-500 col-span-4 md:col-span-7" do %>
+                        <span>詳細を確認する</span>
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 w-4 ml-2 transition-transform group-hover/btn:translate-x-1" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        <% end %>
+                        <!-- お気に入り -->
+                        <div id="favorite_button_<%= mountain.id %>" class="col-span-1 cursor-pointer">
+                            <%= render "shared/favorites_button", mountain: mountain, is_favorited: @favorite_ids.include?(mountain.id) %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% end %>
+        </div>
+        <% else %>
+        <p>
+            お気に入りはまだありません
+        </p>
+        <% end %>
+    </div>
+</div>

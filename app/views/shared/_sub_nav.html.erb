@@ -3,7 +3,7 @@
     <div class="flex flex-col md:flex-row">
       <% nav_items = [
         { name: "マイページ", path: profile_path(current_user), icon: "sample/my.svg"},
-        { name: "お気に入り", path: "#", icon: "sample/favorlte.svg"},
+        { name: "お気に入り", path: favorites_path, icon: "sample/favorlte.svg"},
         { name: "診断", path: new_diagnosis_path, icon: "sample/diagnoses.svg"},
         { name: "おすすめの山", path: mountains_path, icon: "sample/mountain.svg"},
         { name: "記録", path: "#", icon: "sample/record.svg"},

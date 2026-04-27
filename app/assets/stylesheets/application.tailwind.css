@@ -21,6 +21,7 @@
   --color-primary-800: #F4A460;
   --color-primary-900: #708090;
   --color-primary-1000: #FF6347;
+  --color-primary-1100: #FFFFFF;
 
 
   --font-sans: 'Noto Sans JP', sans-serif;
@@ -127,4 +128,12 @@ html {
   .text-field input {
     @apply border-2 border-primary-100 rounded-lg py-2 pl-2
     bg-primary-30 w-full
+  }
+
+  .box2{
+    @apply px-4 py-2 bg-primary-30 w-fit rounded-3xl shadow-sm
+  }
+
+  .favorite-btn-reset{
+    @apply w-full h-full cursor-pointer flex items-center justify-center
   }

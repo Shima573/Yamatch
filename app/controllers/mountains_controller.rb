@@ -3,6 +3,7 @@ class MountainsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @favorite_ids = current_user.favorites.pluck(:mountain_id)
     @has_diagnosis = current_user.diagnoses.exists?
 
     if @has_diagnosis
@@ -12,6 +13,7 @@ class MountainsController < ApplicationController
 
   def show
     @mountain = Mountain.find(params[:id])
+    @is_favorited = current_user.favorited?(@mountain)
     @diagnosis = current_user.diagnoses.last
   end
 end

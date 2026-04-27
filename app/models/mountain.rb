@@ -2,6 +2,9 @@ class Mountain < ApplicationRecord
   # 保存前に生のグレーディング情報を正規化スコアに変換する
   before_save :set_normalized_scores
 
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_users, through: :favorites, source: :user
+
   enum :raw_technical_grade, { A: 0, B: 1, C: 2, D: 3, E: 4 }, prefix: :grade
 
   THRESHOLD = 15
