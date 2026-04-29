@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   # Deviseのルーティング（これが必須）
   devise_for :users
 
@@ -27,5 +26,4 @@ Rails.application.routes.draw do
     resource :favorite, only: [ :create, :destroy ]
   end
   resources :favorites, only: [ :index ]
-
 end
