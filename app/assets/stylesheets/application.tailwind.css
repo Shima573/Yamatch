@@ -137,3 +137,25 @@ html {
   .favorite-btn-reset{
     @apply w-full h-full cursor-pointer flex items-center justify-center
   }
+
+  .legal-title {
+    @apply border border-primary-80 rounded-3xl py-6 text-primary-1100;
+    background: linear-gradient(to bottom, var(--color-primary-200), var(--color-primary-60));
+  }
+
+  .privacy-box {
+    @apply border border-primary-80 rounded-3xl bg-primary-1100 p-4
+  }
+
+  .privacy-title {
+    @apply border-b-2 border-primary-80 pb-2 text-primary-40 font-bold text-lg
+  }
+
+  .privacy-text {
+    @apply pt-2
+  }
+
+  .privacy-list {
+  list-style: disc;
+  padding-left: 1rem;
+  }

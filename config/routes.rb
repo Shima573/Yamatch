@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   # Deviseのルーティング（これが必須）
   devise_for :users
 
@@ -16,6 +17,8 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   root "pages#top"
+  get "legal/privacy"
+  get "legal/terms"
   resources :diagnoses, only: [ :new, :create, :show ]
   resource :profile, only: [ :show, :edit, :update ]
   resources :mountains, only: [ :index, :show ]
@@ -24,4 +27,5 @@ Rails.application.routes.draw do
     resource :favorite, only: [ :create, :destroy ]
   end
   resources :favorites, only: [ :index ]
+
 end
