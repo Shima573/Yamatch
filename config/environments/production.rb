@@ -77,7 +77,7 @@ config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
 # Disable caching for Action Mailer templates even if Action Controller
 # caching is enabled.
 # 本番環境のホスト名を指定（自身のドメインに書き換えてください）
-config.action_mailer.default_url_options = { host: 'your-app-domain.com', protocol: 'https' }
+config.action_mailer.default_url_options = { host: "your-app-domain.com", protocol: "https" }
 
 # Resendを使用するための設定
 config.action_mailer.delivery_method = :resend
@@ -105,11 +105,11 @@ config.active_record.dump_schema_after_migration = false
 # Only use :id for inspections in production.
 config.active_record.attributes_for_inspect = [ :id ]
 
-# Enable DNS rebinding protection and other `Host` header attacks.
-# config.hosts = [
-# "example.com", # Allow requests from example.com
-# /.*\.example\.com/ # Allow requests from subdomains like `www.example.com`
-# ]
-# Skip DNS rebinding protection for the default health check endpoint.
-# config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+  # Enable DNS rebinding protection and other `Host` header attacks.
+  # config.hosts = [
+  # "example.com", # Allow requests from example.com
+  # /.*\.example\.com/ # Allow requests from subdomains like `www.example.com`
+  # ]
+  # Skip DNS rebinding protection for the default health check endpoint.
+  # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 end
