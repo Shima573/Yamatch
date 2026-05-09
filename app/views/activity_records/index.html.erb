@@ -1,0 +1,20 @@
+<div class="min-h-screen">
+    <% if @activity_records.any? %>
+    <div class="grid md:grid-cols-3 gap-6">
+        <% @activity_records.each do |activity_record| %>
+        <div class="p-6 font-mincho">
+            <%# 画像 %>
+            <div class="">
+                <%= image_tag "sample/default.jpg", class: "w-full h-60 rounded-3xl opacity-50 object-cover" %>
+            </div>
+            <%# タイトル %>
+            <p><%= activity_record.title %></p>
+            <%# 日付 %>
+            <%= activity_record.climbed_at %>
+            <% end %>
+        </div>
+    </div>
+    <% else %>
+    <p>登山記録はまだありません</p>
+    <% end %>
+</div>
