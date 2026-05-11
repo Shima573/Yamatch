@@ -1,0 +1,41 @@
+<div class="min-h-screen">
+    新規作成
+    <div class="">
+        <%= form_with model: @activity_record do |f| %>
+        <% if @activity_record.errors.any? %>
+        <ul>
+            <% @activity_record.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+        </ul>
+        <% end %>
+        <div class="">
+            <%# 登山日 %>
+            <div class="">
+                <p>
+                    <%= f.label :climbed_at %>
+                </p>
+                <p>
+                    <%= f.date_field :climbed_at, max: Date.current %>
+                </p>
+            </div>
+            <%# 山名 %>
+            <%= f.collection_select :mountain_id, Mountain.all, :id, :name, { include_blank: "山の名前を選択" } %>
+            <%# 記録タイトル %>
+            <div class="">
+                <p><%= f.label :title %></p>
+                <p>
+                    <%= f.text_field :title %>
+                </p>
+            </div>
+            <%# 記録内容 %>
+            <div class="">
+                <p><%= f.label :body %></p>
+                <p><%= f.text_area :body %></p>
+            </div>
+            <%# 写真投稿 %>
+        </div>
+        <%= f.submit "作成する"%>
+        <% end %>
+    </div>
+</div>

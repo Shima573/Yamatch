@@ -1,4 +1,5 @@
 <div class="min-h-screen">
+    <%= link_to "登山ログを作成", new_activity_record_path %>
     <% if @activity_records.any? %>
     <div class="grid md:grid-cols-3 gap-6">
         <% @activity_records.each do |activity_record| %>
