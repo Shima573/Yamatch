@@ -5,8 +5,13 @@
         <% @activity_records.each do |activity_record| %>
         <div class="p-6 font-mincho">
             <%# 画像 %>
+            <% photo = activity_record.photos.first %>
             <div class="">
-                <%= image_tag "sample/default.jpg", class: "w-full h-60 rounded-3xl opacity-50 object-cover" %>
+                <% if photo&.image&.attached? %>
+                  <%= image_tag photo.image, class: "w-full h-60 rounded-3xl opacity-50 object-cover" %>
+                <% else %>
+                  <%= image_tag "sample/default.jpg", class: "w-full h-60 rounded-3xl opacity-50 object-cover" %>
+                <% end %>
             </div>
             <%# タイトル %>
             <p><%= activity_record.title %></p>

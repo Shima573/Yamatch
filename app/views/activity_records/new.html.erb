@@ -34,6 +34,12 @@
                 <p><%= f.text_area :body %></p>
             </div>
             <%# 写真投稿 %>
+            <div class="">
+              <p><%= f.label :photos %></p>
+              <%= f.fields_for :photos do |photo_form| %>
+                <%= photo_form.file_field :image %>
+              <% end %>
+            </div>
         </div>
         <%= f.submit "作成する"%>
         <% end %>

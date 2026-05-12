@@ -5,6 +5,7 @@ class ActivityRecordsController < ApplicationController
 
   def new
     @activity_record = ActivityRecord.new
+    @activity_record.photos.build
   end
 
   def create
@@ -26,7 +27,8 @@ class ActivityRecordsController < ApplicationController
       :title,
       :body,
       :climbed_at,
-      :mountain_id
+      :mountain_id,
+      photos_attributes: [:image]
     )
   end
 end
