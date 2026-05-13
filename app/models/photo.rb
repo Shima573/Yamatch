@@ -14,5 +14,4 @@ class Photo < ApplicationRecord
       errors.add(:image, "形式が不正です")
     end
   end
-
 end
