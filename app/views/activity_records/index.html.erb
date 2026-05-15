@@ -8,9 +8,9 @@
             <% photo = activity_record.photos.first %>
             <div class="">
                 <% if photo&.image&.attached? %>
-                  <%= image_tag photo.image, class: "w-full h-60 rounded-3xl opacity-50 object-cover" %>
+                <%= image_tag photo.image, class: "w-full h-60 rounded-3xl opacity-50 object-cover" %>
                 <% else %>
-                  <%= image_tag "sample/default.jpg", class: "w-full h-60 rounded-3xl opacity-50 object-cover" %>
+                <%= image_tag "sample/default.jpg", class: "w-full h-60 rounded-3xl opacity-50 object-cover" %>
                 <% end %>
             </div>
             <%# タイトル %>

@@ -138,7 +138,7 @@ html {
     @apply w-full h-full cursor-pointer flex items-center justify-center
   }
 
-  .legal-title {
+  .page-title {
     @apply border border-primary-80 rounded-3xl py-6 text-primary-1100;
     background: linear-gradient(to bottom, var(--color-primary-200), var(--color-primary-60));
   }
@@ -158,4 +158,24 @@ html {
   .privacy-list {
   list-style: disc;
   padding-left: 1rem;
+  }
+
+  .required_field{
+    @apply text-primary-1000
+  }
+
+  .activity_record-title{
+    @apply text-primary-60 pb-2 font-bold
+  }
+
+  .activity_record-frame{
+    @apply border border-primary-300/20 rounded-xl bg-primary-1100 p-4
+  }
+
+  .activity_record-select{
+    @apply border border-primary-300/20 rounded-sm w-full cursor-pointer
+  }
+
+  .activity_record-button{
+    @apply border border-primary-300/20 rounded-full bg-primary-60 text-primary-20 font-bold p-4 w-full cursor-pointer
   }

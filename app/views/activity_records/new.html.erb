@@ -1,50 +1,74 @@
-<div class="min-h-screen">
+<div class="min-h-screen font-mincho">
     <div class="cover">
-        <div class="page-title">
-            <p class="">登山記録 新規作成</p>
-            <p class="">山行の記憶を残しましょう</p>
+        <div class="page-title pl-4">
+            <p class="text-2xl">登山記録 新規作成</p>
+            <p class="text-sm">- 山行の記憶を残しましょう</p>
         </div>
-        <div class="">
-            <%= form_with model: @activity_record do |f| %>
-            <% if @activity_record.errors.any? %>
-            <ul>
-                <% @activity_record.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
+        <div>
+            <%= form_with model: @activity_record, data: { controller: "activity-record" } do |f| %>
+            <div class="text-primary-1000">
+                <% if @activity_record.errors.any? %>
+                <ul>
+                    <% @activity_record.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                    <% end %>
+                </ul>
                 <% end %>
-            </ul>
-            <% end %>
-            <div class="">
+            </div>
+
+            <div class="flex flex-col gap-6 pt-6">
                 <%# 登山日 %>
-                <div class="">
-                    <p>
+                <div class="activity_record-frame">
+                    <p class="activity_record-title">
                         <%= f.label :climbed_at %>
+                        <span class="required_field">*</span>
                     </p>
-                    <p>
-                        <%= f.date_field :climbed_at, max: Date.current %>
+                    <p class="activity_record-select p-2">
+                        <%= f.date_field :climbed_at, class: "w-full cursor-pointer", max: Date.current, data: {activity_record_target: "climbedAt", action:"change->activity-record#checkForm"}  %>
                     </p>
                 </div>
                 <%# 山名 %>
-                <%= f.collection_select :mountain_id, Mountain.all, :id, :name, { include_blank: "山の名前を選択" } %>
+                <div class="activity_record-frame">
+                    <p class="activity_record-title">山の名前<span class="required_field">*</span></p>
+                    <%= f.collection_select :mountain_id, Mountain.all, :id, :name, { include_blank: "登った山を選択" }, class: "activity_record-select p-2", data: {activity_record_target: "mountain", action:"change->activity-record#checkForm"} %>
+                </div>
                 <%# 記録タイトル %>
-                <div class="">
-                    <p><%= f.label :title %></p>
+                <div class="activity_record-frame">
+                    <p class="activity_record-title"><%= f.label :title %><span class="required_field">*</span></p>
                     <p>
-                        <%= f.text_field :title %>
+                        <%= f.text_field :title, class: "activity_record-select px-2 py-2.5", placeholder: "例：初夏の富士山、お鉢巡り", data: {activity_record_target: "title", action:"input->activity-record#checkForm"} %>
                     </p>
                 </div>
                 <%# 記録内容 %>
-                <div class="">
-                    <p><%= f.label :body %></p>
-                    <p><%= f.text_area :body %></p>
+                <div class="activity_record-frame">
+                    <p class="activity_record-title"><%= f.label :body %></p>
+                    <p><%= f.text_area :body, class: "activity_record-select px-2 pb-6", placeholder: "登山の感想、ルート、天気などご自由に記録してください" %>
+                    </p>
                 </div>
 
                 <%# 写真投稿 %>
-                <div class="">
-                    <p><%= f.label :photos %></p>
-                    <%= f.file_field :images, multiple: true %>
+
+                <div class="activity_record-frame">
+                    <div class="grid grid-cols-3 gap-2" data-activity-record-target="preview">
+                        <%# プレビュー表示用エリア %>
+                    </div>
+                    <div class="text-primary-1000 text-center" data-activity-record-target="imageError">
+                        <%# エラーメッセージエリア %>
+                    </div>
+                    <p class="activity_record-title"><%= f.label :photos %></p>
+                    <%= f.file_field :images, multiple: true, class: "hidden", id: "activity_record_images", accept: ".jpg,.jpeg,.png,.gif,.webp", data: {activity_record_target: "images", action:"change->activity-record#previewImages"} %>
+
+                    <label for="activity_record_images"
+                        class="block border border-primary-300/20 rounded-sm p-6 cursor-pointer text-center">
+                        <p class="text-lg font-bold pb-2">クリックしてファイルを選択（複数選択可）</p>
+                        <p class="text-xs">対応形式：JPG / PNG / GIF / WEBP</p>
+                        <p class="text-xs">最大3枚まで（1枚5MB以下）</p>
+                    </label>
                 </div>
             </div>
-            <%= f.submit "作成する"%>
+            <div class="pt-6">
+                <%= f.submit "登山記録を作成する", class: "activity_record-button disabled:opacity-20", data: { activity_record_target: "submitButton" }%>
+            </div>
             <% end %>
         </div>
     </div>
