@@ -1,0 +1,12 @@
+ja:
+  activerecord:
+    models:
+      activity_record: 登山ログ
+
+    attributes:
+      activity_record:
+        title: タイトル
+        climbed_at: 登山日
+        mountain: 山
+        body: 内容
+        photos: 画像

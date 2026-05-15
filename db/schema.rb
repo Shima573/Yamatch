@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_05_06_044305) do
+ActiveRecord::Schema[7.2].define(version: 2026_05_11_214535) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -101,6 +101,14 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_06_044305) do
     t.index ["prefecture"], name: "index_mountains_on_prefecture"
   end
 
+  create_table "photos", force: :cascade do |t|
+    t.bigint "activity_record_id", null: false
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_record_id"], name: "index_photos_on_activity_record_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -123,4 +131,5 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_06_044305) do
   add_foreign_key "diagnoses", "users"
   add_foreign_key "favorites", "mountains"
   add_foreign_key "favorites", "users"
+  add_foreign_key "photos", "activity_records"
 end

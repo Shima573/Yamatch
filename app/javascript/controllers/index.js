@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import ActivityRecordController from "./activity_record_controller"
+application.register("activity-record", ActivityRecordController)
+
 import HeaderController from "./header_controller"
 application.register("header", HeaderController)
 
