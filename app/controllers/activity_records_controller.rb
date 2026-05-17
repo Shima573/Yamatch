@@ -1,6 +1,6 @@
 class ActivityRecordsController < ApplicationController
   def index
-    @activity_records = current_user.activity_records
+    @activity_records = current_user.activity_records.includes(photos: :image_attachment)
   end
 
   def new
@@ -31,6 +31,10 @@ class ActivityRecordsController < ApplicationController
   rescue ActiveRecord::RecordInvalid
     # 再表示（エラー情報を持ったまま返す）
     render :new, status: :unprocessable_entity
+  end
+
+  def show
+    @activity_record = current_user.activity_records.includes(photos: :image_attachment).find(params[:id])
   end
 
   private

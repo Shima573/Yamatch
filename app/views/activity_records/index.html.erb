@@ -3,6 +3,7 @@
     <% if @activity_records.any? %>
     <div class="grid md:grid-cols-3 gap-6">
         <% @activity_records.each do |activity_record| %>
+        <%= link_to activity_record_path(activity_record) do %>
         <div class="p-6 font-mincho">
             <%# 画像 %>
             <% photo = activity_record.photos.first %>
@@ -19,6 +20,7 @@
             <%= activity_record.climbed_at %>
             <% end %>
         </div>
+        <% end %>
     </div>
     <% else %>
     <p>登山記録はまだありません</p>

@@ -1,0 +1,57 @@
+<div class="min-h-screen font-mincho">
+    <div class="max-w-6xl mx-auto pt-10 pb-10 px-7">
+        <%# 日付・山名 %>
+        <div class="flex justify-between items-center border-b-2 border-primary-90 py-4">
+          <div class="">
+            <p class="text-lg">
+              <%= @activity_record.climbed_at.strftime("%Y年%m月%d日") %>
+              <%= weekdays[@activity_record.climbed_at.wday] %>曜日
+            </p>
+          </div>
+          <p class="text-3xl font-bold">
+            <%= @activity_record.mountain.name%>
+          </p>
+        </div>
+        <%# タイトル・山情報 %>
+        <div class="flex flex-col py-4">
+          <p class="text-2xl font-bold">
+            <%= @activity_record.title%>
+          </p>
+          <p class="text-sm text-primary-90/70 p-1">
+            標高<%= @activity_record.mountain.elevation%>m
+            <%# 天候 %>
+            <%# 所要時間 %>
+          </p>
+          <%# 削除・編集 %>
+        </div>
+        <%# 画像 %>
+        <div class="">
+            <%# メイン %>
+            <div class="">
+                <% main_photo = @activity_record.photos.first %>
+                <% sub_photos = @activity_record.photos.drop(1) %>
+                <div>
+                    <% if main_photo&.image&.attached? %>
+                      <%= image_tag main_photo.image, class: "w-full h-[610px] object-cover md:rounded-3xl" %>
+                    <% else %>
+                      <%= image_tag "sample/default.jpg", class: "w-full h-[610px] object-cover md:rounded-3xl" %>
+                    <% end %>
+                </div>
+            </div>
+            <%# サブ %>
+            <div class="md:flex gap-4 py-10">
+                <% sub_photos.each do |photo|%>
+                  <%if photo.image.attached?%>
+                    <%= image_tag photo.image, class: "w-full h-60 object-cover md:rounded-2xl pb-2" %>
+                  <% end %>
+                <% end %>
+            </div>
+        </div>
+
+        <%# 内容 %>
+        <div class="kamon-rule mb-8"><span class="font-mincho text-xs tracking-[0.3em]">◆</span></div>
+        <div class="max-w-3xl mx-auto leading-8 text-[15px]">
+          <%= simple_format(@activity_record.body) %>
+        </div>
+    </div>
+</div>
