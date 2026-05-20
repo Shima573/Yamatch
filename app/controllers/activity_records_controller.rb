@@ -1,5 +1,5 @@
 class ActivityRecordsController < ApplicationController
-  before_action :set_activity_record, only: [:show, :edit, :update]
+  before_action :set_activity_record, only: [ :show, :edit, :update ]
 
   def index
     @activity_records = current_user.activity_records.includes(photos: :image_attachment)
