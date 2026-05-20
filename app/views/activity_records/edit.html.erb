@@ -1,11 +1,11 @@
 <div class="min-h-screen font-mincho">
     <div class="cover">
         <div class="page-title pl-4">
-            <p class="text-2xl">登山記録 新規作成</p>
+            <p class="text-2xl">登山記録 編集</p>
             <p class="text-sm">- 山行の記憶を残しましょう</p>
         </div>
         <div>
-            <%= form_with model: @activity_record, data: { controller: "activity-record", existing_count: 0 } do |f| %>
+            <%= form_with model: @activity_record, data: { controller: "activity-record"} do |f| %>
             <div class="text-primary-1000">
                 <% if @activity_record.errors.any? %>
                 <ul>
@@ -50,17 +50,32 @@
 
                 <%# 写真投稿 %>
                 <div class="activity_record-frame">
-                    <div class="grid grid-cols-3 gap-2" data-activity-record-target="newPreview">
-                        <%# プレビュー表示用エリア %>
+                    <div class="grid grid-cols-3 gap-2" data-activity-record-target="existingPreview"
+                        data-existing-count="<%= @activity_record.photos.count %>">
+                        <%# 既存プレビュー表示用エリア %>
+                        <% @activity_record.photos.select(&:persisted?).each do |photo| %>
+                        <div class="relative border border-primary-300/20 rounded-xl justify-self-start p-2">
+                            <%= image_tag photo.image, class: "w-32 h-32 object-cover rounded" %>
+                            <button type="button"
+                                class="absolute -top-1 -right-2 bg-primary-90 text-primary-10 rounded-full w-6 h-6 cursor-pointer"
+                                data-action="click->activity-record#removeImage" data-photo-id="<%= photo.id %>">
+                                ✕
+                            </button>
+                        </div>
+                        <% end %>
                     </div>
+                    <div class="grid grid-cols-3 gap-2" data-activity-record-target="newPreview">
+                        <%# 新規プレビュー表示用エリア %>
+                    </div>
+
                     <div class="text-primary-1000 text-center" data-activity-record-target="imageError">
                         <%# サーバー側のバリデーションエラー（:base）があればここに表示 %>
                         <% if @activity_record.errors[:base].any? %>
-                            <% @activity_record.errors[:base].each do |message| %>
-                                <% if message.include?("画像") %>
-                                    <p class="text-sm font-bold text-red-500"><%= message %></p>
-                                <% end %>
+                          <% @activity_record.errors[:base].each do |message| %>
+                            <% if message.include?("画像") %>
+                              <p class="text-sm font-bold text-red-500"><%= message %></p>
                             <% end %>
+                          <% end %>
                         <% end %>
                     </div>
                     <p class="activity_record-title"><%= f.label :photos %></p>
@@ -74,8 +89,10 @@
                     </label>
                 </div>
             </div>
+            <%# 削除したいIDをカンマ区切りの文字列などで保持する隠しフィールド %>
+            <%= hidden_field_tag 'activity_record[delete_photo_ids]', '', data: { activity_record_target: "deletePhotoIds" } %>
             <div class="pt-6">
-                <%= f.submit "登山記録を作成する", class: "activity_record-button disabled:opacity-20", data: { activity_record_target: "submitButton" }%>
+                <%= f.submit "登山記録を更新する", class: "activity_record-button disabled:opacity-20", data: { activity_record_target: "submitButton" }%>
             </div>
             <% end %>
         </div>

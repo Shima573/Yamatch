@@ -8,15 +8,22 @@ export default class extends Controller {
     "mountain",
     "title",
     "images",
-    "preview",
+    "newPreview",
+    "existingPreview",
     "imageError",
-    "removeImage"
+    "removeImage",
+    "deletePhotoIds"
   ]
   connect() {
     this.selectedFiles = []
     this.checkForm()
     // 生成したURLを追跡するための配列（掃除用）
     this.previewUrls = []
+    this.photoIds = []
+    // 削除予約リスト
+    this.deletedPhotoIds = []
+    // DOM（HTML）に埋め込まれた初期データを読む
+    this.existingCount = Number(this.element.dataset.existingCount)
   }
 
   // 入力チェック
@@ -40,7 +47,7 @@ export default class extends Controller {
     this.imageErrorTarget.textContent = "";
 
     // 1. 現在の枚数 + 新しく選んだ枚数が3枚を超える場合はエラー
-    if (this.selectedFiles.length + newFiles.length > 3 ) {
+    if (this.totalImages() + newFiles.length > 3 ) {
       this.imageErrorTarget.textContent = "画像は3枚までです"
       // inputの中身を現在の配列(selectedFiles)の状態に戻す
       this.syncInput()
@@ -74,7 +81,7 @@ export default class extends Controller {
     // 既存のURLを一度すべて解放してリセット
     this.clearPreviewUrls()
 
-    this.previewTarget.innerHTML = ""
+    this.newPreviewTarget.innerHTML = ""
 
     this.selectedFiles.forEach((file, index) => {
       const imageUrl = URL.createObjectURL(file)
@@ -92,8 +99,15 @@ export default class extends Controller {
         </button>
       </div>`
 
-      this.previewTarget.insertAdjacentHTML('beforeend', previewHtml)
+      this.newPreviewTarget.insertAdjacentHTML('beforeend', previewHtml)
     })
+  }
+
+  totalImages() {
+    const remainingExisting = this.existingCount - this.deletedPhotoIds.length
+    const total = remainingExisting + this.selectedFiles.length
+
+    return total
   }
 
   // 生成されたオブジェクトURLをすべて無効化する
@@ -105,11 +119,23 @@ export default class extends Controller {
   // 削除処理
   removeImage(event) {
     const index = Number(event.currentTarget.dataset.index)
-    // 配列から削除
-    this.selectedFiles.splice(index, 1)
-    // 同期と再描画
-    this.syncInput()
-    this.renderPreview()
+    const photoId = event.currentTarget.dataset.photoId
+
+    if (photoId) {
+      // DB画像
+      this.deletedPhotoIds.push(photoId)
+      // 値を詰め込むイメージ（removeImage関数の中）
+      this.deletePhotoIdsTarget.value = this.deletedPhotoIds.join(",")
+      // 画面から削除
+      event.currentTarget.parentElement.remove()
+    } else {
+      // 新規画像, 配列から削除
+      this.selectedFiles.splice(index, 1)
+
+      // 同期と再描画
+      this.syncInput()
+      this.renderPreview()
+    }
   }
 
   disconnect() {
