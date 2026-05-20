@@ -18,7 +18,7 @@ class ActivityRecord < ApplicationRecord
 
   def photos_limit
     if photos.length > 3
-      errors.add(:photos, "は3枚までです")
+      errors.add(:base, "画像は3枚までです")
     end
   end
 end
