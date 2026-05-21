@@ -28,5 +28,5 @@ Rails.application.routes.draw do
     resource :favorite, only: [ :create, :destroy ]
   end
   resources :favorites, only: [ :index ]
-  resources :activity_records, only: [ :index, :new, :create, :show, :edit, :update ]
+  resources :activity_records, only: [ :index, :new, :create, :show, :edit, :update, :destroy ]
 end
