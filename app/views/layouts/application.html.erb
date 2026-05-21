@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title><%= content_for(:title) || "Myapp" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -15,13 +16,27 @@
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
-  </head>
+</head>
 
-  <body>
+<body>
     <%= render 'shared/header' %>
+
     <main class="pt-16 bg-primary-30">
-    <%= yield %>
+        <% flash.each do |key, message| %>
+        <% bg_color = (key == "notice" ? "bg-green-100 text-green-700 border-green-300" : "bg-red-100 text-red-700 border-red-300") %>
+        <div id="flash-<%= key %>"
+            class="container mx-auto px-4 py-3 border rounded-lg my-2 font-bold flex justify-between items-center <%= bg_color %>">
+            <span class="flex-1 text-center"><%= message %></span>
+            <button type="button" class="ml-4 text-xl font-bold opacity-50 hover:opacity-100"
+                onclick="this.closest('.container').remove()">
+                &times;
+            </button>
+        </div>
+        <% end %>
+
+        <%= yield %>
     </main>
     <%= render 'shared/footer' %>
-  </body>
+</body>
+
 </html>

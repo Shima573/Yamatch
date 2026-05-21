@@ -2,30 +2,34 @@
     <div class="max-w-6xl mx-auto pt-10 pb-10 px-7">
         <%# 日付・山名 %>
         <div class="flex justify-between items-center border-b-2 border-primary-90 py-4">
-          <div class="">
-            <p class="text-lg">
-              <%= @activity_record.climbed_at.strftime("%Y年%m月%d日") %>
-              <%= weekdays[@activity_record.climbed_at.wday] %>曜日
+            <div class="">
+                <p class="text-lg">
+                    <%= @activity_record.climbed_at.strftime("%Y年%m月%d日") %>
+                    <%= weekdays[@activity_record.climbed_at.wday] %>曜日
+                </p>
+            </div>
+            <p class="text-3xl font-bold">
+                <%= @activity_record.mountain.name%>
             </p>
-          </div>
-          <p class="text-3xl font-bold">
-            <%= @activity_record.mountain.name%>
-          </p>
         </div>
         <%# タイトル・山情報 %>
-        <div class="flex flex-col py-4">
-          <p class="text-2xl font-bold">
-            <%= @activity_record.title%>
-          </p>
-          <p class="text-sm text-primary-90/70 p-1">
-            標高<%= @activity_record.mountain.elevation%>m
-            <%# 天候 %>
-            <%# 所要時間 %>
-          </p>
-          <%# 削除・編集 %>
-          <div class="">
-            <%= link_to '編集', edit_activity_record_path(@activity_record), class: 'link' %>
-          </div>
+        <div class="flex items-center justify-between py-4">
+            <div class="flex flex-col">
+                <p class="text-2xl font-bold">
+                    <%= @activity_record.title%>
+                </p>
+                <p class="text-sm text-primary-90/70 p-1">
+                    標高<%= @activity_record.mountain.elevation%>m
+                    <%# 天候 %>
+                    <%# 所要時間 %>
+                </p>
+            </div>
+
+            <%# 削除・編集 %>
+            <div class="flex items-center gap-4">
+                <%= link_to '編集', edit_activity_record_path(@activity_record), class: 'hover:text-primary-70' %>
+                <%= link_to '削除', activity_record_path(@activity_record),data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: 'hover:text-primary-1000' %>
+            </div>
         </div>
         <%# 画像 %>
         <div class="">
@@ -35,18 +39,20 @@
                 <% sub_photos = @activity_record.photos.drop(1) %>
                 <div>
                     <% if main_photo&.image&.attached? %>
-                      <%= image_tag main_photo.image, class: "w-full h-[610px] object-cover md:rounded-3xl" %>
+                    <%= image_tag main_photo.image, class: "w-full h-[610px] object-cover md:rounded-3xl" %>
                     <% else %>
-                      <%= image_tag "sample/default.jpg", class: "w-full h-[610px] object-cover md:rounded-3xl" %>
+                    <%= image_tag "sample/default.jpg", class: "w-full h-[610px] object-cover opacity-50 md:rounded-3xl" %>
                     <% end %>
                 </div>
             </div>
             <%# サブ %>
-            <div class="md:flex gap-4 py-10">
-                <% sub_photos.each do |photo|%>
-                  <%if photo.image.attached?%>
-                    <%= image_tag photo.image, class: "w-full h-60 object-cover md:rounded-2xl pb-2" %>
-                  <% end %>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 py-10 w-full">
+                <% sub_photos.each do |photo| %>
+                    <% if photo.image.attached? %>
+                        <div class="min-w-0">
+                            <%= image_tag photo.image, class: "w-full aspect-[3/2] object-cover md:rounded-2xl" %>
+                        </div>
+                    <% end %>
                 <% end %>
             </div>
         </div>
@@ -54,7 +60,7 @@
         <%# 内容 %>
         <div class="kamon-rule mb-8"><span class="font-mincho text-xs tracking-[0.3em]">◆</span></div>
         <div class="max-w-3xl mx-auto leading-8 text-[15px]">
-          <%= simple_format(@activity_record.body) %>
+            <%= simple_format(@activity_record.body) %>
         </div>
     </div>
 </div>

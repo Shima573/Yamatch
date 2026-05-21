@@ -1,5 +1,5 @@
 class ActivityRecordsController < ApplicationController
-  before_action :set_activity_record, only: [ :show, :edit, :update ]
+  before_action :set_activity_record, only: [ :show, :edit, :update, :destroy ]
 
   def index
     @activity_records = current_user.activity_records.includes(photos: :image_attachment)
@@ -68,6 +68,11 @@ class ActivityRecordsController < ApplicationController
   rescue ActiveRecord::RecordInvalid
     # 再表示（エラー情報を持ったまま返す）
     render :edit, status: :unprocessable_entity
+  end
+
+  def destroy
+    @activity_record.destroy
+    redirect_to activity_records_path, notice: "登山記録を削除しました"
   end
 
   private
