@@ -2,7 +2,7 @@ class ActivityRecordsController < ApplicationController
   before_action :set_activity_record, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @activity_records = current_user.activity_records.includes(photos: :image_attachment)
+    @activity_records = current_user.activity_records.includes(:mountain, photos: :image_attachment)
   end
 
   def new

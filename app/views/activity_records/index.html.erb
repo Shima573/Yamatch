@@ -1,28 +1,41 @@
-<div class="min-h-screen">
-    <%= link_to "登山ログを作成", new_activity_record_path %>
-    <% if @activity_records.any? %>
-    <div class="grid md:grid-cols-3 gap-6">
-        <% @activity_records.each do |activity_record| %>
-        <%= link_to activity_record_path(activity_record) do %>
-        <div class="p-6 font-mincho">
-            <%# 画像 %>
-            <% photo = activity_record.photos.first %>
-            <div class="">
-                <% if photo&.image&.attached? %>
-                <%= image_tag photo.image, class: "w-full h-60 rounded-3xl object-cover" %>
-                <% else %>
-                <%= image_tag "sample/default.jpg", class: "w-full h-60 rounded-3xl opacity-50 object-cover" %>
-                <% end %>
-            </div>
-            <%# タイトル %>
-            <p><%= activity_record.title %></p>
-            <%# 日付 %>
-            <%= activity_record.climbed_at %>
-            <% end %>
+<div class="min-h-screen py-8">
+    <div class="max-w-2xl mx-auto mb-6 border-b border-primary-90 py-4">
+        <%= link_to new_activity_record_path do %>
+        <div class="flex items-center gap-1">
+            <%= image_tag "sample/memory.svg", class: "w-5 h-5" %>
+            <p class="">登山日記を作成</p>
         </div>
         <% end %>
     </div>
+
+    <% if @activity_records.any? %>
+        <div class="flex flex-col gap-4 max-w-2xl mx-auto">
+            <% @activity_records.each do |activity_record| %>
+                <%= link_to activity_record_path(activity_record) do %>
+                    <div class="flex items-center gap-4 p-4 bg-primary-1100 border border-gray-100 rounded-2xl font-mincho hover:bg-gray-50 transition">
+                        <%# 画像 %>
+                        <% photo = activity_record.photos.first %>
+                        <div class="w-24 h-24 shrink-0">
+                            <% if photo&.image&.attached? %>
+                                <%= image_tag photo.image, class: "w-full h-full rounded-xl object-cover" %>
+                            <% else %>
+                                <%= image_tag "sample/default.jpg", class: "w-full h-full rounded-xl opacity-50 object-cover" %>
+                            <% end %>
+                        </div>
+                        <%# テキストエリア（タイトルと日付を上下に並べる） %>
+                        <div class="flex flex-col gap-1">
+                            <p class="text-lg font-bold text-gray-800"><%= activity_record.title %></p>
+                            <div class="flex gap-1 items-center">
+                                <p class="text-sm text-gray-400"><%= activity_record.mountain.name %></p>
+                                <span class="text-sm text-gray-400">|</span>
+                                <p class="text-sm text-gray-400"><%= activity_record.climbed_at.strftime("%Y年%m月%d日") %>(<%= weekdays[activity_record.climbed_at.wday] %>)</p>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
+            <% end %>
+        </div>
     <% else %>
-    <p>登山記録はまだありません</p>
+        <p class="text-center text-gray-500 mt-8">登山記録はまだありません</p>
     <% end %>
 </div>
