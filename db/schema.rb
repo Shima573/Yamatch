@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_05_11_214535) do
+ActiveRecord::Schema[7.2].define(version: 2026_05_23_112647) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -83,7 +83,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_11_214535) do
     t.decimal "longitude", precision: 9, scale: 6
     t.integer "raw_physical_grade"
     t.integer "raw_technical_grade", default: 0
-    t.string "grade_source_prefecture"
     t.integer "normalized_physical_score"
     t.integer "normalized_technical_score"
     t.boolean "has_toilet", default: false, null: false
@@ -91,14 +90,19 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_11_214535) do
     t.string "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "cable_car"
+    t.boolean "cable_car", default: false, null: false
     t.string "name_kana"
     t.text "narrative"
     t.string "main_course"
+    t.string "tags", default: [], array: true
+    t.string "region"
+    t.string "best_season"
     t.index ["name"], name: "index_mountains_on_name"
+    t.index ["name_kana"], name: "index_mountains_on_name_kana"
     t.index ["normalized_physical_score"], name: "index_mountains_on_normalized_physical_score"
     t.index ["normalized_technical_score"], name: "index_mountains_on_normalized_technical_score"
     t.index ["prefecture"], name: "index_mountains_on_prefecture"
+    t.index ["tags"], name: "index_mountains_on_tags", using: :gin
   end
 
   create_table "photos", force: :cascade do |t|
