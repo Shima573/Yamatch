@@ -1,5 +1,5 @@
 <%# メインコンテナ：全体を薄いクリーム色にして和の質感を出す %>
-<div class="min-h-screen">
+<div class="min-h-screen font-mincho">
     <div class="">
         <%# 山の画像、山名/標高、所在地 %>
         <section class="max-w-5xl mx-auto md:pt-7">
@@ -7,7 +7,8 @@
             <div class="relative h-96 md:h-160 ">
                 <%= image_tag mountain_image(@mountain), class: "w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 md:rounded-3xl" %>
 
-                <div class="absolute bottom-4 left-4 text-white">
+                <div class="absolute bottom-4 left-4 text-white text-center">
+                    <p class="text-beas font-bold font-mincho py-2"><%= @mountain.name_kana%></p>
                     <h3 class="text-3xl md:text-6xl font-bold font-mincho"><%= @mountain.name %></h3>
                 </div>
                 <!-- お気に入り -->
@@ -20,7 +21,7 @@
         <section class="cover">
             <%# 情報 %>
             <div class="">
-                <div class="kamon-rule mb-8"><span class="font-mincho text-xs tracking-[0.3em]">基本情報</span></div>
+                <div class="dividing-line mb-8"><span class="dividing-line-title">基本情報</span></div>
 
                 <div class=" flex flex-col md:flex-row justify-center gap-3">
                     <div class="box flex-1 flex flex-col p-5">
@@ -37,25 +38,58 @@
                         </span>
                     </div>
                     <div class="box flex-1 flex flex-col p-5">
-                        <span class="block text-sm text-primary-900">設備</span>
-                        <span class="flex justify-between">
-                            <p>🚻トイレ</p>
-                            <%= toilet_label(@mountain) %>
-                        </span>
-                    </div>
-                    <div class="box flex-1 flex flex-col p-5">
                         <span class="block text-sm text-primary-900">登山適期</span>
-                        <span>
-                            後日実装予定
-                        </span>
+                        <div class="fgrid grid-cols-4 gap-2 pt-2">
+                            <% @mountain.best_season.split(',').each do |season| %>
+                            <%# ここでヘルパー（season_class）を呼び出して、色（クラス名）を受け取る %>
+                            <span
+                                class="<%= season_class(season) %> text-primary-1100 font-bold text-lg"><%= season %></span>
+                            <% end %>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+
+        <section class="cover">
+            <div class="dividing-line mb-8"><span class="dividing-line-title">設備・サービス</span></div>
+            <div class="box p-4 grid grid-cols-1 md:grid-cols-2 gap-2">
+                <div class="mountain-show-equipment flex items-center p-2">
+                    <%# アイコン画像 %>
+                    <div class="bg-primary-70 w-12 h-12 rounded-lg flex items-center justify-center">
+                        <%= image_tag "sample/toilet.svg", alt: '', class: "w-6 h-6 object-cover" %>
+                    </div>
+                    <%# 設備・サービス %>
+                    <div class="px-4">
+                        <p class="text-sm">トイレ</p>
+                        <p class=""><%= toilet_label(@mountain) %></p>
+                    </div>
+                </div>
+                <div class="mountain-show-equipment flex items-center p-2">
+                    <%# アイコン画像 %>
+                    <div class="bg-primary-70 w-12 h-12 rounded-lg flex items-center justify-center">
+                        <%= image_tag "sample/ropeway.svg", alt: '', class: "w-6 h-6 object-cover" %>
+                    </div>
+                    <%# 設備・サービス %>
+                    <div class="px-4">
+                        <p class="text-sm">ケーブルカー</p>
+                        <p class=""><%= cable_car(@mountain)%></p>
+                    </div>
+                </div>
+                <div class="">
+                    <%# アイコン画像 %>
+                    <div class=""></div>
+                    <%# 設備・サービス %>
+                    <div class=""></div>
+                </div>
+            </div>
+        </section>
+
+
         <%# 難易度、 グレーディングの簡易説明 %>
         <section class="cover">
-            <div class="kamon-rule mb-8"><span class="font-mincho text-xs tracking-[0.3em]">あなたの診断スコア</span></div>
-            <div class="box p-4">
+            <div class="user-dividing-line mb-8"><span class="dividing-line-title">あなたの診断スコア</span></div>
+            <div class="user-box p-4">
                 <% if @diagnosis %>
                 <%= render "shared/diagnosis_score", diagnosis: @diagnosis %>
                 <% else %>
@@ -66,12 +100,12 @@
             </div>
         </section>
         <section class="cover">
-            <div class="kamon-rule mb-8"><span class="font-mincho text-xs tracking-[0.3em]">山の難易度</span></div>
+            <div class="dividing-line mb-8"><span class="dividing-line-title">山の難易度</span></div>
             <div class="box p-4">
                 <div class="grid grid-cols-1 gap-7">
                     <div>
                         <div class="flex justify-between items-end mb-2">
-                            <span class="text-slate-600 font-bold">推定体力レベル</span>
+                            <span class="text-slate-600 font-bold">推定体力度</span>
                             <span class="text-2xl font-black text-primary-50"><%= @mountain.raw_physical_grade %><span
                                     class="text-sm text-primary-90 ml-1">/ 10</span></span>
                         </div>
@@ -79,11 +113,12 @@
                             <div class="bg-primary-50 h-full rounded-full transition-all duration-1000"
                                 style="width: <%= @mountain.raw_physical_grade * 10 %>%"></div>
                         </div>
+                        <p class="mt-3 text-xs text-primary-900">※<%= physical_grade_comment(@mountain) %></p>
                     </div>
 
                     <div>
                         <div class="flex justify-between items-end mb-2">
-                            <span class="text-slate-600 font-bold">推定技術ランク</span>
+                            <span class="text-slate-600 font-bold">推定技術度</span>
                             <span class="text-2xl font-black text-primary-800">
                                 <%= @mountain.raw_technical_grade %>
                                 <span class="text-sm text-primary-90 ml-1">相当</span>
@@ -96,7 +131,7 @@
                             </div>
                             <% end %>
                         </div>
-                        <p class="mt-3 text-xs text-primary-900">※A: 初級 〜 E: 超上級（岩場・鎖場の経験に基づく判定）</p>
+                        <p class="mt-3 text-xs text-primary-900">※<%= technical_grade_comment(@mountain) %></p>
                     </div>
                 </div>
             </div>
@@ -104,75 +139,71 @@
         </section>
 
         <section class="cover">
-            <div class="kamon-rule mb-8"><span class="font-mincho text-xs tracking-[0.3em]">グレーディングについて</span></div>
+            <div class="dividing-line mb-8"><span class="dividing-line-title">スコアの見方</span></div>
             <details class="box p-4">
-                <summary class="cursor-pointer">グレーディングについて</summary>
+                <summary class="cursor-pointer">スコアの見方(グレーディング)について</summary>
                 <div class="md:ml-4">
-                    <details>
-                        <summary class="cursor-pointer">体力度について</summary>
-                        <div class="grading">
-                            <div class="grading-content">
-                                <span class="grading-item">1〜3（日帰り可能）：</span>
-                                <p class="">初心者向け。短時間で無理なく登れる。</p>
-                            </div>
-                            <p class="grading-sup">・初心者や、まずは体力作りから始めたい人向け。</p>
+                    <summary class="cursor-pointer">体力度について</summary>
+                    <div class="grading">
+                        <div class="grading-content">
+                            <span class="grading-item">1〜3（日帰り可能）：</span>
+                            <p class="">初心者向け。短時間で無理なく登れる。</p>
                         </div>
-                        <div class="grading">
-                            <div class="grading-content">
-                                <span class="grading-item">4〜5（1泊以上）：</span>
-                                <p class="">中級者向け。ある程度の体力が必要。</p>
-                            </div>
-                            <p class="grading-sup">・荷物を背負って長時間歩けるかが目安</p>
+                        <p class="grading-sup">・初心者や、まずは体力作りから始めたい人向け。</p>
+                    </div>
+                    <div class="grading">
+                        <div class="grading-content">
+                            <span class="grading-item">4〜5（1泊以上）：</span>
+                            <p class="">中級者向け。ある程度の体力が必要。</p>
                         </div>
-                        <div class="grading">
-                            <div class="grading-content">
-                                <span class="grading-item">6〜10（2泊以上）：</span>
-                                <p class="">上級者向け。長距離・長時間行動。</p>
-                            </div>
-                            <p class="grading-sup">・持久力と計画的な行動が必要</p>
+                        <p class="grading-sup">・荷物を背負って長時間歩けるかが目安</p>
+                    </div>
+                    <div class="grading">
+                        <div class="grading-content">
+                            <span class="grading-item">6〜10（2泊以上）：</span>
+                            <p class="">上級者向け。長距離・長時間行動。</p>
                         </div>
-                    </details>
+                        <p class="grading-sup">・持久力と計画的な行動が必要</p>
+                    </div>
                 </div>
 
                 <div class="md:ml-4">
-                    <details>
-                        <summary class="cursor-pointer">技術度について</summary>
-                        <div class="grading">
-                            <div class="grading-content">
-                                <span class="grading-item">A：</span>
-                                <p class="">整備された登山道が中心。</p>
-                            </div>
-                            <p class="grading-sup">・初心者でも概ね安心して歩ける</p>
+                    <summary class="cursor-pointer">技術度について</summary>
+                    <div class="grading">
+                        <div class="grading-content">
+                            <span class="grading-item">A：</span>
+                            <p class="">整備された登山道が中心。</p>
                         </div>
-                        <div class="grading">
-                            <div class="grading-content">
-                                <span class="grading-item">B：</span>
-                                <p class="">急な登降や分かりにくい道あり。</p>
-                            </div>
-                            <p class="grading-sup">・地図確認や基本的な登山経験が必要</p>
+                        <p class="grading-sup">・初心者でも概ね安心して歩ける</p>
+                    </div>
+                    <div class="grading">
+                        <div class="grading-content">
+                            <span class="grading-item">B：</span>
+                            <p class="">急な登降や分かりにくい道あり。</p>
                         </div>
-                        <div class="grading">
-                            <div class="grading-content">
-                                <span class="grading-item">C：</span>
-                                <p class="">鎖場・岩場あり。</p>
-                            </div>
-                            <p class="grading-sup">・三点支持や高度感への慣れが必要</p>
+                        <p class="grading-sup">・地図確認や基本的な登山経験が必要</p>
+                    </div>
+                    <div class="grading">
+                        <div class="grading-content">
+                            <span class="grading-item">C：</span>
+                            <p class="">鎖場・岩場あり。</p>
                         </div>
-                        <div class="grading">
-                            <div class="grading-content">
-                                <span class="grading-item">D：</span>
-                                <p class="">厳しい岩場・ガレ場が連続。</p>
-                            </div>
-                            <p class="grading-sup">・ルート判断と安定した足運びが必要</p>
+                        <p class="grading-sup">・三点支持や高度感への慣れが必要</p>
+                    </div>
+                    <div class="grading">
+                        <div class="grading-content">
+                            <span class="grading-item">D：</span>
+                            <p class="">厳しい岩場・ガレ場が連続。</p>
                         </div>
-                        <div class="grading">
-                            <div class="grading-content">
-                                <span class="grading-item">E：</span>
-                                <p class="">危険箇所が連続する上級者向け。</p>
-                            </div>
-                            <p class="grading-sup">・高度な技術と十分な経験が前提</p>
+                        <p class="grading-sup">・ルート判断と安定した足運びが必要</p>
+                    </div>
+                    <div class="grading">
+                        <div class="grading-content">
+                            <span class="grading-item">E：</span>
+                            <p class="">危険箇所が連続する上級者向け。</p>
                         </div>
-                    </details>
+                        <p class="grading-sup">・高度な技術と十分な経験が前提</p>
+                    </div>
                 </div>
                 <!-- 注意事項 -->
                 <div class="mt-4 border-t pt-3">
@@ -193,18 +224,24 @@
         </section>
         <%# 山の紹介文 %>
         <section class="cover">
-            <div class="kamon-rule mb-8"><span class="font-mincho text-xs tracking-[0.3em]">山の物語</span></div>
-            <div class="text-center font-mincho">
-                <%# wikiを参考予定 %>
-                <p class="">
-                    <%= @mountain.prefecture %>に位置する
-                    標高<%= @mountain.elevation %>mの山
-                </p>
+            <div class="relative max-w-4xl mx-auto font-mincho">
+                <div class="">
+                    <%= image_tag "sample/story-board.png", alt: '', class: "object-cover w-full h-auto rounded-2xl" %>
+                </div>
+                <div
+                    class="absolute inset-0 top-10 pt-9 text-3xl font-bold text-primary-60/80 text-center tracking-[0.15em]">
+                    <p class="">山の物語</p>
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center p-12">
+                    <div class="w-[82%] text-justify leading-[2.0] tracking-[0.15em] font-semibold text-primary-1200">
+                        <%= simple_format(@mountain.narrative) %>
+                    </div>
+                </div>
             </div>
         </section>
         <%# アクセス・周辺情報 %>
         <section class="cover">
-            <div class="kamon-rule mb-8"><span class="font-mincho text-xs tracking-[0.3em]">アクセス・周辺情報</span></div>
+            <div class="dividing-line mb-8"><span class="dividing-line-title">アクセス</span></div>
             <!-- アクセス -->
             <div class="box wa-card p-6 mb-5">
                 <h3 class="font-mincho text-base mb-5 flex items-center gap-2" style="color:var(--sumi)">
@@ -229,7 +266,7 @@
         </section>
         <%# 注意事項 %>
         <section class="cover">
-            <div class="kamon-rule mb-8"><span class="font-mincho text-xs tracking-[0.3em]">登山前の確認事項</span></div>
+            <div class="dividing-line mb-8"><span class="dividing-line-title">登山前の確認事項</span></div>
             <div class="box p-4 max-w-xl mx-auto">
                 <div class="flex items-center gap-3 pb-2">
                     <div class="w-8 h-7 bg-primary-800/30 border border-primary-800 rounded-lg text-center">⚠️</div>

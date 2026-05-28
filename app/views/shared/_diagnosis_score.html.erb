@@ -1,7 +1,7 @@
 <div class="grid grid-cols-1 gap-7">
     <div>
         <div class="flex justify-between items-end mb-2">
-            <span class="text-slate-600 font-bold">体力レベル</span>
+            <span class="text-slate-600 font-bold">体力度</span>
             <span class="text-2xl font-black text-primary-50"><%= diagnosis.recommended_physical_max %><span
                     class="text-sm text-primary-90 ml-1">/ 10</span></span>
         </div>
@@ -13,7 +13,7 @@
     </div>
     <div>
         <div class="flex justify-between items-end mb-2">
-            <span class="text-slate-600 font-bold">技術ランク</span>
+            <span class="text-slate-600 font-bold">技術度</span>
             <span class="text-2xl font-black text-primary-800">
                 <%= case diagnosis.recommended_technical_max
                   when 1 then 'A' when 2 then 'B' when 3 then 'C' when 4 then 'D' when 5 then 'E'

@@ -22,6 +22,7 @@
   --color-primary-900: #708090;
   --color-primary-1000: #FF6347;
   --color-primary-1100: #FFFFFF;
+  --color-primary-1200: #8f5e03;
 
 
   --font-sans: 'Noto Sans JP', sans-serif;
@@ -87,22 +88,48 @@ html {
 
 /* 山の詳細 */
   /* ============ 仕切り線 ============ */
-  .kamon-rule {
+  .dividing-line{
     display:flex;
     align-items:center;
     gap:10px;
     color: var(--color-primary-700);
   }
-  .kamon-rule::before,
-  .kamon-rule::after {
+
+  .dividing-line::before,
+  .dividing-line::after{
     content:'';
     flex:1;
     height:1px;
     background: linear-gradient(to right, transparent, var(--color-primary-700) 40%, transparent);
   }
 
+  .user-dividing-line{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color: var(--color-primary-200);
+  }
+
+  .user-dividing-line::before,
+  .user-dividing-line::after{
+    content:'';
+    flex:1;
+    height:1px;
+    background: linear-gradient(to right, transparent, var(--color-primary-200) 40%, transparent);
+  }
+  /* ================================== */
+
+  .dividing-line-title{
+    @apply text-sm tracking-[0.3em]
+  }
+
   .box {
     @apply border-3 border-double border-primary-700 relative bg-primary-10/40
+    font-mincho
+  }
+
+  .user-box {
+    @apply border-3 border-double border-primary-200 relative bg-primary-10/40
     font-mincho
   }
 
@@ -179,3 +206,27 @@ html {
   .activity_record-button{
     @apply border border-primary-300/20 rounded-full bg-primary-60 text-primary-20 font-bold p-4 w-full cursor-pointer
   }
+
+  .mountain-show-equipment{
+    @apply border border-primary-300/20 rounded-lg bg-primary-1100
+  }
+
+  /* =======シーズン======== */
+  .spring{
+    background-image: linear-gradient(135deg, #a445b2, #ff0066);
+    @apply rounded-full w-fit py-2 px-4
+  }
+  .summer{
+    background-image: linear-gradient(135deg, #50cc7f, #f5d100);
+    @apply rounded-full w-fit py-2 px-4
+
+  }
+  .autumn{
+    background-image: linear-gradient(135deg, #f9d423, #ff4e50);
+    @apply rounded-full w-fit py-2 px-4
+  }
+  .winter{
+    background-image: linear-gradient(135deg, #30cfd0, #330867);
+    @apply rounded-full w-fit py-2 px-4
+  }
+  /* ====================== */
