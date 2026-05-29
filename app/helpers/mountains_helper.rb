@@ -8,7 +8,7 @@ module MountainsHelper
   end
 
   def mountain_image(mountain)
-    mountain.image_url.presence || "sample/placeholder-mountain.jpg"
+    mountain.image_url.presence || "sample/default.jpg"
   end
 
   def physical_grade_comment(mountain)
