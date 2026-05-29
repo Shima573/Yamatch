@@ -143,7 +143,7 @@
             <details class="box p-4">
                 <summary class="cursor-pointer">スコアの見方(グレーディング)について</summary>
                 <div class="md:ml-4">
-                    <summary class="cursor-pointer">体力度について</summary>
+                    <summary class="">体力度について</summary>
                     <div class="grading">
                         <div class="grading-content">
                             <span class="grading-item">1〜3（日帰り可能）：</span>
@@ -168,7 +168,7 @@
                 </div>
 
                 <div class="md:ml-4">
-                    <summary class="cursor-pointer">技術度について</summary>
+                    <summary class="">技術度について</summary>
                     <div class="grading">
                         <div class="grading-content">
                             <span class="grading-item">A：</span>
@@ -237,6 +237,24 @@
                         <%= simple_format(@mountain.narrative) %>
                     </div>
                 </div>
+            </div>
+        </section>
+        <%# 登山コース %>
+        <section class="cover">
+            <div class="dividing-line mb-8"><span class="dividing-line-title">登山コース</span></div>
+            <div class="box wa-card p-6 mb-5">
+                <div class="">
+                    <p class="text-lg font-bold text-primary-700">主なコース</p>
+                    <div class="text-base font-bold text-gray-800 flex items-center gap-1">
+                        ・<%= @mountain.main_course %>
+                    </div>
+                </div>
+                <details class="p-2">
+                    <summary class="text-primary-900">他のコースを見る</summary>
+                    <div class="">
+                        <%# 他コースを実装予定 %>
+                    </div>
+                </details>
             </div>
         </section>
         <%# アクセス・周辺情報 %>
