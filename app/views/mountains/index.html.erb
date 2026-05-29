@@ -19,15 +19,15 @@
         <div>
             <!-- 山一覧部分 -->
             <% if  @has_diagnosis%>
-            <div class="flex flex-col gap-8 max-w-xl mx-auto ">
+            <div class="flex flex-col gap-8 max-w-xl mx-auto">
                 <% @recommended_mountains.each_with_index do |mountain, index| %>
-                <div class="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col border-2 border-primary-50 relative">
+                <div
+                    class="group bg-white rounded-3xl overflow-hidden shadow-md flex flex-col border border-primary-700 relative">
                     <div class="relative h-56 overflow-hidden">
-                        <%= image_tag mountain_image(mountain), class: "w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" %>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent">
-                        </div>
+                        <%= image_tag mountain_image(mountain), class: "w-full h-full object-cover" %>
                         <div class="absolute bottom-4 left-4 text-white">
-                            <h3 class="text-xl font-bold font-mincho"><%= mountain.name %></h3>
+                            <p class="text-xs font-bold font-mincho"><%= mountain.name_kana%></p>
+                            <p class="text-2xl font-bold font-mincho"><%= mountain.name %></p>
                             <span class="text-xs font-bold font-mincho text-primary-20">📍
                                 <%= mountain.prefecture %>
                             </span>
@@ -43,13 +43,14 @@
                             <div class="bg-slate-50 p-3 rounded-2xl text-center">
                                 <span class="block text-[12px] text-slate-400 font-bold uppercase">標高</span>
                                 <span
-                                    class="text-base font-bold font-mincho text-primary-40"><%= mountain.elevation %>m</span>
+                                    class="text-base font-bold font-mincho text-primary-90"><%= mountain.elevation %>m</span>
                             </div>
                             <div class="bg-slate-50 p-3 rounded-2xl text-center">
                                 <span class="block text-[12px] text-slate-400 font-bold uppercase">難易度</span>
-                                <span class="text-base font-bold font-mincho text-primary-40">体
-                                    <%= mountain.raw_physical_grade %> /
-                                    技 <%= mountain.raw_technical_grade %></span>
+                                <span class="text-base font-bold font-mincho text-primary-90">
+                                    体 <span class="text-primary-50"><%= mountain.raw_physical_grade %></span> /
+                                    技 <span class="text-primary-800"><%= mountain.raw_technical_grade %></span>
+                                </span>
                             </div>
                         </div>
 
@@ -69,7 +70,7 @@
                             <% end %>
                             <%# お気に入り %>
                             <div id="favorite_button_<%= mountain.id %>" class="col-span-1 cursor-pointer">
-                            <%= render "shared/favorites_button", mountain: mountain, is_favorited: @favorite_ids.include?(mountain.id) %>
+                                <%= render "shared/favorites_button", mountain: mountain, is_favorited: @favorite_ids.include?(mountain.id) %>
                             </div>
                         </div>
                     </div>
