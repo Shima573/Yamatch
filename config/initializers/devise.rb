@@ -325,6 +325,6 @@ Devise.setup do |config|
                   prompt: "select_account",
                   callback_url: "http://localhost:3000/users/auth/google_oauth2/callback"
 
-  config.omniauth_path_prefix = '/users/auth'
-  OmniAuth.config.allowed_request_methods = [:post]
+  config.omniauth_path_prefix = "/users/auth"
+  OmniAuth.config.allowed_request_methods = [ :post ]
 end

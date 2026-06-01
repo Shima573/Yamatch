@@ -50,8 +50,8 @@ gem "rails-i18n"
 
 gem "resend"
 
-gem 'omniauth-google-oauth2'
-gem 'omniauth-rails_csrf_protection' # OmniAuth 2.0でrequest phaseのCSRF対策に必須
+gem "omniauth-google-oauth2"
+gem "omniauth-rails_csrf_protection" # OmniAuth 2.0でrequest phaseのCSRF対策に必須
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # Deviseのルーティング（これが必須）
   devise_for :users, controllers: {
-    omniauth_callbacks: 'users/omniauth_callbacks'
+    omniauth_callbacks: "users/omniauth_callbacks"
   }
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?

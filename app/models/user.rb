@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable,
-         omniauth_providers: [:google_oauth2]
+         omniauth_providers: [ :google_oauth2 ]
 
   has_many :favorites, dependent: :destroy
   has_many :favorite_mountains, through: :favorites, source: :mountain
