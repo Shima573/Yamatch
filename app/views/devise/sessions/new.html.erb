@@ -29,7 +29,7 @@
             </div>
             <%# ログイン状態の保持 %>
             <% if devise_mapping.rememberable? %>
-            <div class="field pb-6">
+            <div class="flex gap-1 field pb-6">
                 <p><%= f.check_box :remember_me %></p>
                 <p><%= f.label :remember_me %></p>
             </div>
@@ -37,6 +37,15 @@
             <%# ログインボタン %>
             <%= f.submit "ログイン", class: "actions items-center justify-center w-full px-6 py-3 font-bold text-center text-slate-700 transition-all duration-200 bg-white border-2 border-slate-200 rounded-xl hover:bg-primary-500 hover:text-white hover:border-primary-500 cursor-pointer" %>
             <% end %>
+
+            <%= button_to user_google_oauth2_omniauth_authorize_path,
+                    method: :post,
+                    form: {data: { turbo: false }},
+                    class: "btn-google" do %>
+            <%= image_tag "sample/google-logo.svg", alt: "Google", class: "google-icon" %>
+            <span class="">Googleでログイン</span>
+            <% end %>
+
 
             <%# 新規登録 %>
             <div class="text-center pt-6">
@@ -51,7 +60,6 @@
                 <span>パスワードリセットはこちら</span>
                 <% end %>
             </div>
-
         </div>
     </div>
 </div>
