@@ -322,8 +322,7 @@ Devise.setup do |config|
                   ENV["GOOGLE_CLIENT_ID"],
                   ENV["GOOGLE_CLIENT_SECRET"],
                   scope: "email,profile",
-                  prompt: "select_account",
-                  callback_url: "http://localhost:3000/users/auth/google_oauth2/callback"
+                  prompt: "select_account"
 
   config.omniauth_path_prefix = "/users/auth"
   OmniAuth.config.allowed_request_methods = [ :post ]
