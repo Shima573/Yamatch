@@ -74,6 +74,14 @@ jobs:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:password@localhost:5432/yamatch_test
           # REDIS_URL: redis://localhost:6379/0
+          # 💡 不足していた環境変数をすべてダミー値で追加します
+          CLOUDINARY_CLOUD_NAME: dummy_cloud_name
+          CLOUDINARY_API_KEY: dummy_api_key
+          CLOUDINARY_API_SECRET: dummy_api_secret
+          RESEND_API_KEY: dummy_resend_api_key
+          MAIL_FROM: test@example.com
+          GOOGLE_CLIENT_ID: dummy_client_id
+          GOOGLE_CLIENT_SECRET: dummy_client_secret
         run: |
           bin/rails db:test:prepare
           bundle exec rspec
