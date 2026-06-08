@@ -69,6 +69,11 @@ group :development, :test do
   gem "rspec-rails"
   gem "factory_bot_rails"
   gem "faker"
+
+  # RuboCop
+  gem "rubocop", require: false
+  gem "rubocop-rails", require: false     # Railsアプリの場合
+  gem "rubocop-performance", require: false
 end
 
 group :development do
