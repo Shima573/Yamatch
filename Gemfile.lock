@@ -508,6 +508,9 @@ DEPENDENCIES
   rails-i18n
   resend
   rspec-rails
+  rubocop
+  rubocop-performance
+  rubocop-rails
   rubocop-rails-omakase
   selenium-webdriver
   sprockets-rails
