@@ -95,6 +95,11 @@ class Mountain < ApplicationRecord
     result += perfect.first(2)
     result += easy.first(3 - result.size) if result.size < 3
     result += challenge.first(3 - result.size) if result.size < 3
+    if result.size < 3
+      # まだ3件未満、かつ perfect にまだ使っていないデータがあるなら
+      # perfect の「3件目以降」から、足りない分（3 - result.size）を result に追加する
+      result += (perfect - result).first(3 - result.size)
+    end
 
     result
   end
