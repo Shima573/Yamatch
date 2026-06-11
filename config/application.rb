@@ -24,5 +24,8 @@ module Myapp
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
     config.i18n.default_locale = :ja
+
+    # Rails 8.1 のタイムゾーンの挙動を先取りして警告を消す設定
+    config.active_support.to_time_preserves_timezone = :zone
   end
 end
