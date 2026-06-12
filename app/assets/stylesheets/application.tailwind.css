@@ -192,6 +192,10 @@ html {
     @apply text-primary-1000
   }
 
+  /* ===登山日記関連=== */
+  .create-record-btn {
+    @apply border border-primary-900 rounded-3xl w-fit px-4 py-2 shadow hover:-translate-y-0.5 transition-all duration-200
+  }
   .activity_record-title{
     @apply text-primary-60 pb-2 font-bold
   }
@@ -207,6 +211,7 @@ html {
   .activity_record-button{
     @apply border border-primary-300/20 rounded-full bg-primary-60 text-primary-20 font-bold p-4 w-full cursor-pointer
   }
+  /* =========== */
 
   .mountain-show-equipment{
     @apply border border-primary-300/20 rounded-lg bg-primary-1100
