@@ -77,13 +77,14 @@ html {
   animation: float 2s ease-in-out infinite;
 }
 
-/* アイコンナビ */
-.icon-nav{
-  @apply items-center py-2 px-4 border-b-2 border-transparent text-primary-20
+/* ナビ */
+.nav{
+  @apply items-center py-2 px-4 border-b-2 border-transparent text-primary-20 font-mincho
+          transition-all duration-300 hover:-translate-y-0.5
 }
 
 .active {
-  @apply bg-primary-20/50 text-primary-60 rounded-3xl
+  @apply bg-primary-20/50 text-primary-1200 rounded-3xl
 }
 
 /* 山の詳細 */

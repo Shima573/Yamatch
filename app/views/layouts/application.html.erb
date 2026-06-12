@@ -30,7 +30,7 @@
 <body>
     <%= render 'shared/header' %>
 
-    <main class="pt-16 bg-primary-30">
+    <main class="pt-16 bg-primary-30 font-mincho">
         <% flash.each do |key, message| %>
         <% bg_color = (key == "notice" ? "bg-green-100 text-green-700 border-green-300" : "bg-red-100 text-red-700 border-red-300") %>
         <div id="flash-<%= key %>"
