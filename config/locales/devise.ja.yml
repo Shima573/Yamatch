@@ -56,8 +56,8 @@ ja:
       updated_but_not_signed_in: "アカウント情報を更新しましたが、パスワード変更のため再度ログインしてください。"
     sessions:
       signed_in: "ログインしました。"
-      signed_out: "ログアウトしました。"
-      already_signed_out: "ログアウトしました。"
+      signed_out: ""
+      already_signed_out: ""
     unlocks:
       send_instructions: "数分以内にアカウント解除手順のメールをお送りします。"
       send_paranoid_instructions: "アカウントが存在すれば、数分以内に解除手順のメールが届きます。"
