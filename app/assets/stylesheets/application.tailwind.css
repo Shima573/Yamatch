@@ -130,7 +130,7 @@ html {
   }
 
   .user-box {
-    @apply border-3 border-double border-primary-200 relative bg-primary-10/40
+    @apply border-3 border-double border-primary-200 rounded-3xl relative bg-primary-10/40
     font-mincho
   }
 
