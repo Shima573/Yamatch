@@ -1,16 +1,23 @@
+<% content_for(:title, "登山日記の詳細") %>
 <div class="min-h-screen font-mincho">
     <div class="max-w-6xl mx-auto pt-10 pb-10 px-7">
         <%# 日付・山名 %>
-        <div class="flex justify-between items-center border-b-2 border-primary-90 py-4">
+        <div class="flex justify-between items-end border-b-2 border-primary-90 py-4">
             <div class="">
                 <p class="text-lg">
                     <%= @activity_record.climbed_at.strftime("%Y年%m月%d日") %>
                     <%= weekdays[@activity_record.climbed_at.wday] %>曜日
                 </p>
             </div>
-            <p class="text-3xl font-bold">
-                <%= @activity_record.mountain.name%>
-            </p>
+            <div class="">
+                <p class="text-xs text-center">
+                    <%= @activity_record.mountain.name_kana%>
+                </p>
+                <p class="text-3xl font-bold">
+                    <%= @activity_record.mountain.name%>
+                </p>
+            </div>
+
         </div>
         <%# タイトル・山情報 %>
         <div class="flex items-center justify-between py-4">
@@ -48,11 +55,11 @@
             <%# サブ %>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 py-10 w-full">
                 <% sub_photos.each do |photo| %>
-                    <% if photo.image.attached? %>
-                        <div class="min-w-0">
-                            <%= image_tag photo.image, class: "w-full aspect-[3/2] object-cover md:rounded-2xl" %>
-                        </div>
-                    <% end %>
+                <% if photo.image.attached? %>
+                <div class="min-w-0">
+                    <%= image_tag photo.image, class: "w-full aspect-[3/2] object-cover md:rounded-2xl" %>
+                </div>
+                <% end %>
                 <% end %>
             </div>
         </div>

@@ -3,12 +3,6 @@
         <div class="text-center text-black font-mincho py-6">
             <h1 class="text-3xl">ログイン</h1>
         </div>
-        <%# エラーメッセージ %>
-        <% if flash[:alert] %>
-        <div class="text-red-500 text-center pb-2">
-            <%= flash[:alert] %>
-        </div>
-        <% end %>
 
         <div class="box px-6 py-9 rounded-3xl max-w-xl mx-auto">
             <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>

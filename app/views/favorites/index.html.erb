@@ -1,3 +1,4 @@
+<% content_for(:title, "お気に入り一覧") %>
 <div class="min-h-screen">
     <div class="p-5">
         <div class="favorite_header py-6">
@@ -19,6 +20,9 @@
                         <div class="flex items-center text-2xl font-semibold">
                             <%= image_tag "sample/placeholder-mountain.jpg", class: "w-10 h-11"  %>
                             <%= mountain.name %>
+                            <span class="text-sm pl-1">
+                            (<%= mountain.name_kana%>)
+                            </span>
                         </div>
                         <!-- 標高・距離・都道府県 -->
                         <div class="box2 flex flex-col items-center">

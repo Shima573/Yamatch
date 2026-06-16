@@ -2,12 +2,13 @@
 <html>
 
 <head>
+    <%= favicon_link_tag 'sample/favicon.png' %>
     <title><%= content_for(:title) || "やまッチ" %></title>
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="<%= content_for(:title) || "やまッチ" %>" />
+    <meta name="twitter:title" content="<%= content_for(:og_title) || "やまッチ" %>" />
     <meta property="og:site_name" content="山の診断アプリ" />
-    <meta property="og:title" content="<%= content_for(:title) || "山の診断アプリ" %>" />
+    <meta property="og:title" content="<%= content_for(:og_title) || "山の診断アプリ" %>" />
     <meta property="og:description" content="<%= content_for(:description) || "あなたにぴったりの山を3つおすすめする診断アプリです。" %>" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="<%= image_url('sample/OGP_main.png') %>" />
@@ -20,8 +21,6 @@
     <%= yield :head %>
 
     <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
@@ -30,7 +29,7 @@
 <body>
     <%= render 'shared/header' %>
 
-    <main class="pt-16 bg-primary-30">
+    <main class="pt-16 bg-primary-30 font-mincho">
         <% flash.each do |key, message| %>
         <% bg_color = (key == "notice" ? "bg-green-100 text-green-700 border-green-300" : "bg-red-100 text-red-700 border-red-300") %>
         <div id="flash-<%= key %>"

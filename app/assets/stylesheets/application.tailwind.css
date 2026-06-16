@@ -77,13 +77,14 @@ html {
   animation: float 2s ease-in-out infinite;
 }
 
-/* アイコンナビ */
-.icon-nav{
-  @apply items-center py-2 px-4 border-b-2 border-transparent text-primary-20
+/* ナビ */
+.nav{
+  @apply items-center py-2 px-4 border-b-2 border-transparent text-primary-20 font-mincho
+          transition-all duration-300 hover:-translate-y-0.5
 }
 
 .active {
-  @apply bg-primary-20/50 text-primary-60 rounded-3xl
+  @apply bg-primary-20/50 text-primary-1200 rounded-3xl
 }
 
 /* 山の詳細 */
@@ -129,7 +130,7 @@ html {
   }
 
   .user-box {
-    @apply border-3 border-double border-primary-200 relative bg-primary-10/40
+    @apply border-3 border-double border-primary-200 rounded-3xl relative bg-primary-10/40
     font-mincho
   }
 
@@ -191,6 +192,10 @@ html {
     @apply text-primary-1000
   }
 
+  /* ===登山日記関連=== */
+  .create-record-btn {
+    @apply border border-primary-900 rounded-3xl w-fit px-4 py-2 shadow hover:-translate-y-0.5 transition-all duration-200
+  }
   .activity_record-title{
     @apply text-primary-60 pb-2 font-bold
   }
@@ -206,6 +211,7 @@ html {
   .activity_record-button{
     @apply border border-primary-300/20 rounded-full bg-primary-60 text-primary-20 font-bold p-4 w-full cursor-pointer
   }
+  /* =========== */
 
   .mountain-show-equipment{
     @apply border border-primary-300/20 rounded-lg bg-primary-1100
