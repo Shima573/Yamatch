@@ -1,4 +1,5 @@
-<header id="header" data-controller="header" class="<%= current_page?(root_path) ? 'is-top' : '' %>">
+<header id="header" data-controller="header"
+    class="relative font-mincho <%= current_page?(root_path) ? 'is-top' : '' %>">
     <%= link_to (user_signed_in? ? profile_path(current_user) : root_path), class: "logo" do %>
     <span class="text-xl font-mincho font-black">
         やま<em class="text-primary-1200">ッチ</em>
@@ -20,28 +21,48 @@
     </button>
     <% end %>
 
-    <% if user_signed_in? %>
-    <div class="">
-        <%= render 'shared/sub_nav'%>
-    </div>
-    <% end %>
-
+    <%# スマホ用メニュー %>
     <% if user_signed_in? %>
     <%# ログイン後 %>
-    <div class="hidden md:flex flex-col md:flex-row absolute md:static top-full left-0 nav-links justify-between md:items-center gap-3 w-full md:w-auto"
-        data-header-target="menu">
-
-        <%= link_to "ログアウト",
+    <div class="hidden absolute top-full left-0 w-full bg-primary-50 shadow-lg py-4" data-header-target="menu">
+        <%= render 'shared/sub_nav'%>
+        <div class="py-2 mt-4 border-t border-primary-1100 pt-4">
+            <%= link_to "ログアウト",
                 destroy_user_session_path,
                 data: { turbo_method: :delete },
-                class: "md:border md:border-primary-20 md:rounded-3xl px-4 md:py-1 md:text-primary-20 font-black hover:text-primary-50 hover:bg-primary-20 transition-all
-                block w-full md:w-auto border-3 border-double border-primary-700 bg-primary-30/90 font-mincho px-4 py-4 text-primary-90 md:bg-transparent" %>
+                class: "px-4 font-black" %>
+        </div>
     </div>
     <% else %>
     <%# ログイン前 %>
-    <div class="md:flex md:flex-row md:static nav-links justify-between md:items-center gap-3 md:w-auto">
+    <div class="md:hidden">
+        <%= link_to "ログイン", new_user_session_path, class: "nav-link" %>
+    </div>
+    <% end %>
+
+
+    <%# PC用 %>
+    <% if user_signed_in? %>
+    <div class="hidden md:flex">
+        <%= render 'shared/sub_nav'%>
+    </div>
+    <div class="hidden md:flex">
+        <%# ログイン後 %>
+        <div class="">
+            <div class="">
+                <%= link_to "ログアウト",
+                destroy_user_session_path,
+                data: { turbo_method: :delete },
+                class: "border border-primary-20 rounded-3xl px-4 py-2 text-primary-20 font-black hover:text-primary-50 hover:bg-primary-20 transition-all" %>
+            </div>
+        </div>
+    </div>
+    <% else %>
+    <%# ログイン前 %>
+    <div class="hidden md:flex md:flex-row md:static justify-between md:items-center gap-3 md:w-auto">
         <%= link_to "ログイン", new_user_session_path, class: "nav-link" %>
         <%= link_to "相性診断をする", new_diagnosis_path, class: "nav-cta font-blok rounded-3xl px-4 py-1 transition-transform duration-300 hover:-translate-y-1 hidden md:block" %>
     </div>
     <% end %>
+
 </header>
