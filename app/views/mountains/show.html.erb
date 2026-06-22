@@ -225,16 +225,32 @@
         </section>
         <%# 山の紹介文 %>
         <section class="cover">
-            <div class="relative max-w-4xl mx-auto font-mincho">
+            <div class="hidden md:block relative max-w-4xl mx-auto font-mincho">
                 <div class="">
                     <%= image_tag "sample/story-board.png", alt: '', class: "object-cover w-full h-auto rounded-2xl" %>
                 </div>
-                <div
-                    class="absolute inset-0 top-10 pt-9 text-3xl font-bold text-primary-60/80 text-center tracking-[0.15em]">
-                    <p class="">山の物語</p>
+
+                <div class="absolute inset-0 top-10">
+                    <div
+                        class=" pt-9 text-3xl font-bold text-primary-60/80 text-center tracking-[0.15em]">
+                        <p class="">山の物語</p>
+                    </div>
+                    <div class="flex items-center justify-center pt-5 pb-10 ">
+                        <div
+                            class="w-[80%] text-justify leading-[2.0] tracking-[0.15em] font-semibold text-primary-1200">
+                            <%= simple_format(@mountain.narrative) %>
+                        </div>
+                    </div>
                 </div>
-                <div class="absolute inset-0 flex items-center justify-center p-12">
-                    <div class="w-[82%] text-justify leading-[2.0] tracking-[0.15em] font-semibold text-primary-1200">
+            </div>
+
+            <div class="md:hidden">
+                <div class="box p-6">
+                    <h2 class="text-center text-2xl font-bold text-primary-60 mb-6">
+                        山の物語
+                    </h2>
+
+                    <div class="leading-8 text-primary-1200">
                         <%= simple_format(@mountain.narrative) %>
                     </div>
                 </div>
