@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="header"
 export default class extends Controller {
-  static targets = ["menu"]
+  static targets = ["menu", "hamburger", "close"]
 
   connect() {
     const header = this.element
@@ -18,5 +18,7 @@ export default class extends Controller {
   toggle() {
     this.element.classList.toggle("is-open")
     this.menuTarget.classList.toggle("hidden")
+    this.hamburgerTarget.classList.toggle("hidden")
+    this.closeTarget.classList.toggle("hidden")
   }
 }
