@@ -44,7 +44,7 @@ GEM
       erubi (~> 1.11)
       rails-dom-testing (~> 2.2)
       rails-html-sanitizer (~> 1.6)
-    active_storage_validations (3.0.4)
+    active_storage_validations (3.0.5)
       activejob (>= 6.1.4)
       activemodel (>= 6.1.4)
       activestorage (>= 6.1.4)
@@ -165,7 +165,7 @@ GEM
     ffi (1.17.4-x86_64-darwin)
     ffi (1.17.4-x86_64-linux-gnu)
     ffi (1.17.4-x86_64-linux-musl)
-    globalid (1.3.0)
+    globalid (1.4.0)
       activesupport (>= 6.1)
     hashie (5.1.0)
       logger
@@ -522,7 +522,7 @@ CHECKSUMS
   actionpack (8.0.5) sha256=c9de868975dd124a0956499140bd5e63c367865deca01292df7c3195c8da4b35
   actiontext (8.0.5) sha256=12f3ce3d6326230728316ba14eeac27b2100d6e7d9bfcb4b01fb27b187a812e1
   actionview (8.0.5) sha256=6d0fa9e63df0cf2729b1f54d0988336c149eb2bbc6049f4c2834d7b62f351413
-  active_storage_validations (3.0.4) sha256=134ba51d5166cd419311fe1510d7eb64af6996e7041d8d56c26a2f151abb6522
+  active_storage_validations (3.0.5) sha256=4ae7338769ea28d67f1eb20a5693de4cf356c0a68ade914be4b5ae9691628425
   activejob (8.0.5) sha256=2dabe5c3bfe284aba4687c52b930564335435dde3a60b047821f9d3bd0d2ea10
   activemodel (8.0.5) sha256=c796813d46dc1373f4c6c0ec91dfc520b53683ea773c3b3f9a12c4b3eb145bc2
   activerecord (8.0.5) sha256=89b261b6cd910c9431cf2475f3f6e5e2f5ce589805043a33ef2b004376a129e6
@@ -574,7 +574,7 @@ CHECKSUMS
   ffi (1.17.4-x86_64-darwin) sha256=aa70390523cf3235096cf64962b709b4cfbd5c082a2cb2ae714eb0fe2ccda496
   ffi (1.17.4-x86_64-linux-gnu) sha256=9d3db14c2eae074b382fa9c083fe95aec6e0a1451da249eab096c34002bc752d
   ffi (1.17.4-x86_64-linux-musl) sha256=3fdf9888483de005f8ef8d1cf2d3b20d86626af206cbf780f6a6a12439a9c49e
-  globalid (1.3.0) sha256=05c639ad6eb4594522a0b07983022f04aa7254626ab69445a0e493aa3786ff11
+  globalid (1.4.0) sha256=037f12fbf1d9d7a014d501c2d5c77356fd4ddd96d7a7991d6700bba96706f427
   hashie (5.1.0) sha256=c266471896f323c446ea8207f8ffac985d2718df0a0ba98651a3057096ca3870
   httparty (0.24.2) sha256=8fca6a54aa0c4aa4303a0fd33e5e2156175d6a5334f714263b458abd7fda9c38
   i18n (1.15.2) sha256=00f9eb62412fe593b2a65a97daa75300d37abb8f7202ec748e94b6d46a9dd1b5
