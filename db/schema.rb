@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_07_13_022515) do
+ActiveRecord::Schema[8.0].define(version: 2026_08_03_065750) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -112,6 +112,22 @@ ActiveRecord::Schema[8.0].define(version: 2026_07_13_022515) do
     t.index ["activity_record_id"], name: "index_photos_on_activity_record_id"
   end
 
+  create_table "plans", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "mountain_id", null: false
+    t.string "title"
+    t.date "climbing_date", null: false
+    t.integer "companion_count"
+    t.text "route"
+    t.text "equipment"
+    t.text "note"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mountain_id"], name: "index_plans_on_mountain_id"
+    t.index ["user_id"], name: "index_plans_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -138,4 +154,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_07_13_022515) do
   add_foreign_key "favorites", "mountains"
   add_foreign_key "favorites", "users"
   add_foreign_key "photos", "activity_records"
+  add_foreign_key "plans", "mountains"
+  add_foreign_key "plans", "users"
 end
