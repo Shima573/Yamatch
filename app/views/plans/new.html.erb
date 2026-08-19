@@ -1,0 +1,57 @@
+<div class="min-h-screen">
+    <%# ページタイトル %>
+    <h1 class="">登山プラン</h1>
+    <%# 入力フォーム %>
+    <div class="">
+        <%= form_with model: @plan do |f| %>
+        <%# 山の名前 %>
+        <div class="">
+            <p class="">登山予定の山名</p>
+            <%= @mountain.name %>
+        </div>
+        <%# プランタイトル %>
+        <div class="">
+            <p class="">プランタイトル</p>
+            <%= f.text_field :title %>
+        </div>
+        <%# 登山日 %>
+        <div class="">
+            <p class="">登山日</p>
+            <%= f.date_field :climbing_date, class: "w-full cursor-pointer", min: Date.current %>
+        </div>
+        <%# 同行人数 %>
+        <div class="">
+            <p class="">同行人数</p>
+            <div class="">
+                <button type="button">+</button>
+                <%= f.number_field :companion_count %>
+                <button type="button">-</button>
+            </div>
+        </div>
+        <%# ルート %>
+        <div class="">
+            <p class="">ルート</p>
+            <%= f.text_area :route %>
+        </div>
+        <%# 持ち物 %>
+        <div class="">
+            <p class="">持ち物リスト</p>
+            <div class="">
+              <div class="">
+                <%= f.check_box :equipment, { multiple: true }, "登山靴", nil %>
+                <%= f.label :equipment, "登山靴" %>
+              </div>
+              <div class="">
+                <%= f.check_box :equipment, { multiple: true }, "ザック", nil %>
+                <%= f.label :equipment, "ザック" %>
+              </div>
+            </div>
+        </div>
+        <%# メモ %>
+        <div class="">
+          <p class="">メモ</p>
+          <%= f.text_area :note %>
+        </div>
+        <% end %>
+    </div>
+</div>

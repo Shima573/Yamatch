@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "plens/new"
+  get "plens/create"
   # Deviseのルーティング（これが必須）
   devise_for :users, controllers: {
     omniauth_callbacks: "users/omniauth_callbacks"
