@@ -1,6 +1,7 @@
 class ActivityRecord < ApplicationRecord
   belongs_to :user
   belongs_to :mountain
+  belongs_to :plan, optional: true
   has_many :photos, dependent: :destroy
   accepts_nested_attributes_for :photos
 
