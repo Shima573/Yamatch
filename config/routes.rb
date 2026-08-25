@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   get "legal/terms"
   resources :diagnoses, only: [ :new, :create, :show ]
   resource :profile, only: [ :show, :edit, :update ]
-  
+
   resources :mountains, only: [ :index, :show ] do
     resource :favorite, only: [ :create, :destroy ]
     resources :plans, only: [ :new, :create ]
