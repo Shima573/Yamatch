@@ -3,7 +3,7 @@
     <h1 class="">登山プラン</h1>
     <%# 入力フォーム %>
     <div class="">
-        <%= form_with model: @plan do |f| %>
+        <%= form_with model: [@mountain, @plan] do |f| %>
         <%# 山の名前 %>
         <div class="">
             <p class="">登山予定の山名</p>
@@ -52,6 +52,8 @@
           <p class="">メモ</p>
           <%= f.text_area :note %>
         </div>
+
+        <%= f.submit "登山プランを作成" %>
         <% end %>
     </div>
 </div>

@@ -1,2 +1,2 @@
-module PlensHelper
+module PlansHelper
 end
