@@ -24,7 +24,7 @@
             <p class="">同行人数</p>
             <div class="">
                 <button type="button">+</button>
-                <%= f.number_field :companion_count %>
+                <%= f.number_field :companion_count, value: 1 , min: 1 %>
                 <button type="button">-</button>
             </div>
         </div>
