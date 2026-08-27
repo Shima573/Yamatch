@@ -38,12 +38,39 @@
             <p class="">持ち物リスト</p>
             <div class="">
               <div class="">
-                <%= f.check_box :equipment, { multiple: true }, "登山靴", nil %>
-                <%= f.label :equipment, "登山靴" %>
+                <p class="">基本の持ち物</p>
+                <% basic_items.each do |item|%>
+                  <%= f.check_box :equipment, { multiple: true }, item, nil %>
+                  <%= f.label :equipment, item %>
+                <% end %>
               </div>
               <div class="">
-                <%= f.check_box :equipment, { multiple: true }, "ザック", nil %>
-                <%= f.label :equipment, "ザック" %>
+                <p class="">服装・レイヤリング（着替え含む）</p>
+                <% clothing_items.each do |item|%>
+                  <%= f.check_box :equipment, { multiple: true }, item, nil %>
+                  <%= f.label :equipment, item %>
+                <% end %>
+              </div>
+              <div class="">
+                <p class="">快適・衛生用品</p>
+                <% hygiene_items.each do |item|%>
+                  <%= f.check_box :equipment, { multiple: true }, item, nil %>
+                  <%= f.label :equipment, item %>
+                <% end %>
+              </div>
+              <div class="">
+                <p class="">あると安心・便利な道具</p>
+                <% convenient_items.each do |item|%>
+                  <%= f.check_box :equipment, { multiple: true }, item, nil %>
+                  <%= f.label :equipment, item %>
+                <% end %>
+              </div>
+              <div class="">
+                <p class="">宿泊・山小屋（必要な場合）</p>
+                <% lodging_items.each do |item|%>
+                  <%= f.check_box :equipment, { multiple: true }, item, nil %>
+                  <%= f.label :equipment, item %>
+                <% end %>
               </div>
             </div>
         </div>
