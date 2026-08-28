@@ -7,6 +7,9 @@ import { application } from "./application"
 import ActivityRecordController from "./activity_record_controller"
 application.register("activity-record", ActivityRecordController)
 
+import CompanionCountController from "./companion_count_controller"
+application.register("companion-count", CompanionCountController)
+
 import HeaderController from "./header_controller"
 application.register("header", HeaderController)
 

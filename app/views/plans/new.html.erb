@@ -22,10 +22,10 @@
         <%# 同行人数 %>
         <div class="">
             <p class="">同行人数</p>
-            <div class="">
-                <button type="button">+</button>
-                <%= f.number_field :companion_count, value: 1 , min: 1 %>
-                <button type="button">-</button>
+            <div class="" data-controller="companion-count">
+                <button type="button" data-action="click->companion-count#increment">+</button>
+                <%= f.number_field :companion_count, value: 1 , min: 1, data: {"companion-count-target": "input"} %>
+                <button type="button" data-action="click->companion-count#decrement">-</button>
             </div>
         </div>
         <%# ルート %>
