@@ -10,3 +10,11 @@ ja:
         mountain: 山
         body: 内容
         photos: 画像
+
+      plan:
+        title: プランタイトル
+        climbing_date: 登山日
+        companion_count: 同行人数
+        route: ルート
+        equipment: 持ち物
+        note: メモ

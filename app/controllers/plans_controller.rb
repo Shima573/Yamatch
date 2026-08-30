@@ -10,7 +10,11 @@ class PlansController < ApplicationController
     # PlanはこのMountainに所属と関連付けを設定
     @plan.mountain = @mountain
     # 保存する対象はPlan
-    @plan.save
+    if @plan.save
+      redirect_to profile_path(current_user)
+    else
+      render :new, status: :see_other
+    end
   end
 
   private

@@ -1,6 +1,14 @@
 <div class="min-h-screen">
     <%# ページタイトル %>
     <h1 class="">登山プラン</h1>
+    <%# エラーメッセージ %>
+    <% if @plan.errors.any?%>
+    <ul>
+      <% @plan.errors.each do |error| %>
+      <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+    <% end %>
     <%# 入力フォーム %>
     <div class="">
         <%= form_with model: [@mountain, @plan] do |f| %>
