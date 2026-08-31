@@ -1,4 +1,8 @@
 class PlansController < ApplicationController
+  def index
+    @plans = current_user.plans.includes(:mountain)
+  end
+
   def new
     @mountain = Mountain.find(params[:mountain_id])
     @plan = Plan.new
@@ -15,6 +19,10 @@ class PlansController < ApplicationController
     else
       render :new, status: :see_other
     end
+  end
+
+  def show
+    @plan = current_user.plans.find(params[:id])
   end
 
   private

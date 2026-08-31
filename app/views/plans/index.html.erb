@@ -1,0 +1,45 @@
+<% content_for(:title, "登山プラン一覧") %>
+<div class="min-h-screen">
+    <div class="max-w-4xl mx-auto py-4">
+        <h1 class="text-2xl border-b py-4">登山プラン一覧</h1>
+        <% if @plans.any? %>
+        <div class="grid grid-cols-4 gap-4 py-4">
+            <% @plans.each do |plan| %>
+            <div class="border border-[#E4E0D5] border-l-4 border-l-[#6B7A4F]">
+                <div class="p-6 contour-card">
+                    <div class="pb-6">
+                        <p class="text-xl"><%= plan.mountain.name %></p>
+                        <p class="text-sm text-primary-900"><%= plan.title %></p>
+                    </div>
+                    <div class="flex justify-between">
+                        <p class="text-sm"><%= format_plan_date(plan.climbing_date) %></p>
+                        <div class="flex text-primary-900">
+                            <svg class="w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8">
+                                <path d="M17 20v-1a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v1" />
+                                <circle cx="10" cy="7" r="3.5" />
+                                <path d="M21 20v-1a4 4 0 0 0-3-3.87" />
+                                <path d="M15.5 3.63a4 4 0 0 1 0 7.75" />
+                            </svg>
+                            <p class="text-sm pl-1"><%= plan.companion_count %>人</p>
+                        </div>
+                    </div>
+                    <div
+                        class="mt-4 pt-4 border-t border-[#E4E0D5]  text-[#212B23]">
+                        <%= link_to plan_path(plan), class: "flex items-center justify-between text-sm" do %>
+                        <span>詳細を見る</span>
+                        <svg class="w-4 h-4 text-[#6B7A4F]" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M9 6l6 6-6 6" />
+                        </svg>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+            <% end %>
+        </div>
+        <% else %>
+          <p class="text-center text-gray-500 mt-8">登山プランはまだありません</p>
+        <% end %>
+    </div>
+</div>
