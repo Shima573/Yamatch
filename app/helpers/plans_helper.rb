@@ -58,4 +58,15 @@ module PlansHelper
       "着替え一式"
     ]
   end
+
+  def format_plan_date(date)
+    # ここで月を取得
+    month = date.month
+    # ここで日を取得
+    day = date.day
+    # ここで曜日を取得
+    weekday = weekdays[date.wday]
+    # 最後に「10/2（金）」という文字列を作る
+    "#{month}/#{day} (#{weekday})"
+  end
 end

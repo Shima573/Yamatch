@@ -1,6 +1,6 @@
 class PlansController < ApplicationController
   def index
-    @plans = current_user.plans
+    @plans = current_user.plans.includes(:mountain)
   end
 
   def new
