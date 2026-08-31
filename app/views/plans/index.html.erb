@@ -1,0 +1,14 @@
+<div class="min-h-screen">
+  <h1 class="">登山プラン一覧</h1>
+  <div class="">
+    <% @plans.each do |plan| %>
+      <div>
+        <p><%= plan.mountain.name %></p>
+        <p><%= plan.title %></p>
+        <p><%= plan.climbing_date %></p>
+        <p><%= plan.companion_count %>人</p>
+        <%= link_to "詳細を見る", plan_path(plan) %>
+      </div>
+    <% end %>
+  </div>
+</div>

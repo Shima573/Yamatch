@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_08_06_050118) do
+ActiveRecord::Schema[8.0].define(version: 2026_08_31_054006) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -121,11 +121,11 @@ ActiveRecord::Schema[8.0].define(version: 2026_08_06_050118) do
     t.date "climbing_date", null: false
     t.integer "companion_count"
     t.text "route"
-    t.text "equipment"
     t.text "note"
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "equipment", default: [], array: true
     t.index ["mountain_id"], name: "index_plans_on_mountain_id"
     t.index ["user_id"], name: "index_plans_on_user_id"
   end

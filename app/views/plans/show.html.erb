@@ -1,0 +1,50 @@
+<div class="min-h-screen">
+  <h1>登山プラン</h1>
+
+  <div>
+    <%# 山の名前 %>
+    <div>
+      <p>登山予定の山</p>
+      <%= @plan.mountain.name %>
+    </div>
+
+    <%# プランタイトル %>
+    <div>
+      <p>プランタイトル</p>
+      <%= @plan.title %>
+    </div>
+
+    <%# 登山日 %>
+    <div>
+      <p>登山日</p>
+      <%= @plan.climbing_date %>
+    </div>
+
+    <%# 同行人数 %>
+    <div>
+      <p>同行人数</p>
+      <%= @plan.companion_count %>人
+    </div>
+
+    <%# ルート %>
+    <div>
+      <p>ルート</p>
+      <%= @plan.route %>
+    </div>
+
+    <%# 持ち物 %>
+    <div>
+      <p>持ち物リスト</p>
+
+      <% @plan.equipment.each do |item| %>
+        <p>✓ <%= item %></p>
+      <% end %>
+    </div>
+
+    <%# メモ %>
+    <div>
+      <p>メモ</p>
+      <%= @plan.note %>
+    </div>
+  </div>
+</div>
