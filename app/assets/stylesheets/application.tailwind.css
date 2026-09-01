@@ -245,11 +245,55 @@ html {
 
 
   /* ========登山プラン========= */
-.contour-card {
+  .contour-card {
       background-color: #FBFAF7;
       background-image:
         radial-gradient(circle at 100% 0%, rgba(107,122,79,0.10) 0%, transparent 42%),
         repeating-radial-gradient(circle at 100% 0%, transparent 0 13px, rgba(107,122,79,0.07) 13px 14px, transparent 14px 26px);
-    }
+  }
+
+  .p-border {
+    @apply border border-[#E4E0D5] border-l-4 border-l-[#6B7A4F]
+  }
+
+  .p-border-bottom {
+    @apply border-b border-[#E4E0D5]
+  }
+
+  .p-border-list {
+    @apply border border-[#E4E0D5] rounded-lg
+  }
+
+  .p-equipment-list[open] summary {
+    @apply border-b border-[#E4E0D5]
+  }
+
+  .p-list {
+    @apply pl-4 py-2
+  }
+
+  .p-title {
+    @apply text-sm text-primary-900 pb-1
+  }
+
+  .p-select {
+    @apply py-1 border border-primary-300/20 rounded-sm w-full cursor-pointer bg-primary-1100
+  }
+
+  .p-btn {
+    @apply border border-primary-300/20 rounded-full bg-primary-60/90 text-primary-20 font-bold p-4 w-full cursor-pointer
+  }
+
+  input[type="number"] {
+    appearance: textfield;
+  }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+
 
   /* ============================ */
