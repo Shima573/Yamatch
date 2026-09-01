@@ -72,8 +72,8 @@
                         </div>
 
                         <%# 服装・レイヤリング %>
-                        <details class="p-border-list bg-primary-1100">
-                            <summary class="cursor-pointer p-border-bottom p-2">
+                        <details class="p-border-list p-equipment-list bg-primary-1100">
+                            <summary class="cursor-pointer p-2">
                                 服装・レイヤリング（着替え含む）
                             </summary>
                             <% clothing_items.each_with_index do |item, index| %>
@@ -85,8 +85,8 @@
                         </details>
 
                         <%# 快適・衛生用品 %>
-                        <details class="p-border-list bg-primary-1100">
-                            <summary class="cursor-pointer p-border-bottom p-2">
+                        <details class="p-border-list p-equipment-list bg-primary-1100">
+                            <summary class="cursor-pointer p-2">
                                 快適・衛生用品
                             </summary>
                             <% hygiene_items.each_with_index do |item, index| %>
@@ -100,8 +100,8 @@
 
                     <div class="flex flex-col gap-3">
                         <%# あると安心・便利な道具 %>
-                        <details class="p-border-list bg-primary-1100">
-                            <summary class="cursor-pointer p-border-bottom p-2">
+                        <details class="p-border-list p-equipment-list bg-primary-1100">
+                            <summary class="cursor-pointer p-2">
                                 あると安心・便利な道具
                             </summary>
                             <% convenient_items.each_with_index do |item, index| %>
@@ -113,8 +113,8 @@
                         </details>
 
                         <%# 宿泊・山小屋 %>
-                        <details class="p-border-list bg-primary-1100">
-                            <summary class="cursor-pointer p-border-bottom p-2">
+                        <details class="p-border-list p-equipment-list bg-primary-1100">
+                            <summary class="cursor-pointer p-equipment-list p-2">
                                 宿泊・山小屋（必要な場合）
                             </summary>
                             <% lodging_items.each_with_index do |item, index| %>

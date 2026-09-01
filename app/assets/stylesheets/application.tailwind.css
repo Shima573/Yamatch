@@ -264,8 +264,12 @@ html {
     @apply border border-[#E4E0D5] rounded-lg
   }
 
+  .p-equipment-list[open] summary {
+    @apply border-b border-[#E4E0D5]
+  }
+
   .p-list {
-    @apply pl-4 py-1 pt-2
+    @apply pl-4 py-2
   }
 
   .p-title {
