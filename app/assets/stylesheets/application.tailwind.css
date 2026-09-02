@@ -294,6 +294,10 @@ html {
     margin: 0;
   }
 
+  .p-display {
+    @apply py-2 px-3 rounded-sm bg-primary-1200/10;
+  }
+
 
 
   /* ============================ */

@@ -1,50 +1,127 @@
+<% content_for(:title, "登山プラン詳細") %>
 <div class="min-h-screen">
-  <h1>登山プラン</h1>
+    <div class="max-w-3xl mx-auto py-10 p-4">
+        <div class="p-border-bottom py-4">
+            <h1 class="text-2xl">登山プランの詳細</h1>
+        </div>
 
-  <div>
-    <%# 山の名前 %>
-    <div>
-      <p>登山予定の山</p>
-      <%= @plan.mountain.name %>
+        <div class="mt-6 flex flex-col gap-4">
+            <div class="p-border bg-[#FBFAF7] p-5">
+                <%# 山の名前 %>
+                <div class="py-2">
+                    <p class="p-title">登山予定の山</p>
+                    <p class="text-lg">
+                    <%= @plan.mountain.name %>
+                    </p>
+                </div>
+
+                <%# プランタイトル %>
+                <div class="py-2">
+                    <p class="p-title">プランタイトル</p>
+                    <p class="p-display px-2 py-1">
+                    <%= @plan.title %>
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-6 py-2">
+                    <%# 登山日 %>
+                    <div>
+                        <p class="p-title">登山日</p>
+                        <p class="text-center p-display px-2 py-1">
+                        <%= @plan.climbing_date %>
+                        </p>
+                    </div>
+
+                    <%# 同行人数 %>
+                    <div>
+                        <p class="p-title">同行人数</p>
+                        <p class="text-center p-display px-2 py-1">
+                        <%= @plan.companion_count %>人
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-border bg-[#FBFAF7] p-5">
+                <%# ルート %>
+                <div>
+                    <p class="pb-1">ルート</p>
+                    <p class="p-display">
+                    <%= @plan.route.presence || "未入力" %>
+                    </p>
+                </div>
+            </div>
+            <%# 持ち物 %>
+            <div class="p-border bg-[#FBFAF7] p-5">
+                <p class="p-border-bottom py-2">持ち物リスト</p>
+
+                <div class="grid grid-cols-2 gap-4 pt-4">
+                    <div class="flex flex-col gap-3">
+                        <div class="p-border-list bg-primary-1100">
+                            <p class="p-border-bottom p-2">基本の持ち物</p>
+                            <% basic_items.each do |item| %>
+                            <%if @plan.equipment.include?(item) %>
+                            <div class="p-list">
+                                <p class="">✓ <%= item %></p>
+                            </div>
+                            <% end %>
+                            <% end %>
+                        </div>
+                        <div class="p-border-list bg-primary-1100">
+                            <p class="p-border-bottom p-2">服装・レイヤリング（着替え含む）</p>
+                            <% clothing_items.each do |item| %>
+                            <%if @plan.equipment.include?(item) %>
+                            <div class="p-list">
+                                <p class="">✓ <%= item %></p>
+                            </div>
+                            <% end %>
+                            <% end %>
+                        </div>
+                        <div class="p-border-list bg-primary-1100">
+                            <p class="p-border-bottom p-2">快適・衛生用品</p>
+                            <% hygiene_items.each do |item| %>
+                            <%if @plan.equipment.include?(item) %>
+                            <div class="p-list">
+                                <p class="">✓ <%= item %></p>
+                            </div>
+                            <% end %>
+                            <% end %>
+                        </div>
+
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <div class="p-border-list bg-primary-1100">
+                            <p class="p-border-bottom p-2">あると安心・便利な道具</p>
+                            <% convenient_items.each do |item| %>
+                            <%if @plan.equipment.include?(item) %>
+                            <div class="p-list">
+                                <p class="">✓ <%= item %></p>
+                            </div>
+                            <% end %>
+                            <% end %>
+                        </div>
+                        <div class="p-border-list bg-primary-1100">
+                            <p class="p-border-bottom p-2">宿泊・山小屋（必要な場合）</p>
+                            <% lodging_items.each do |item| %>
+                            <%if @plan.equipment.include?(item) %>
+                            <div class="p-list">
+                                <p class="">✓ <%= item %></p>
+                            </div>
+                            <% end %>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%# メモ %>
+            <div class="p-border bg-[#FBFAF7] p-5">
+                <div>
+                    <p class="pb-1">メモ</p>
+                    <p class="p-display">
+                    <%= @plan.note.presence || "未入力" %>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <%# プランタイトル %>
-    <div>
-      <p>プランタイトル</p>
-      <%= @plan.title %>
-    </div>
-
-    <%# 登山日 %>
-    <div>
-      <p>登山日</p>
-      <%= @plan.climbing_date %>
-    </div>
-
-    <%# 同行人数 %>
-    <div>
-      <p>同行人数</p>
-      <%= @plan.companion_count %>人
-    </div>
-
-    <%# ルート %>
-    <div>
-      <p>ルート</p>
-      <%= @plan.route %>
-    </div>
-
-    <%# 持ち物 %>
-    <div>
-      <p>持ち物リスト</p>
-
-      <% @plan.equipment.each do |item| %>
-        <p>✓ <%= item %></p>
-      <% end %>
-    </div>
-
-    <%# メモ %>
-    <div>
-      <p>メモ</p>
-      <%= @plan.note %>
-    </div>
-  </div>
 </div>
