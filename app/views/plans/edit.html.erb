@@ -1,0 +1,140 @@
+<% content_for(:title, "登山プラン編集") %>
+<div class="min-h-screen">
+    <div class="max-w-3xl mx-auto py-10 p-4">
+        <%# ページタイトル %>
+        <div class="p-border-bottom py-4">
+            <h1 class="text-2xl">登山プランを編集</h1>
+            <p class="text-sm text-primary-900">必要な項目を上から順に入力してください</p>
+        </div>
+        <%# エラーメッセージ %>
+        <% if @plan.errors.any?%>
+        <ul>
+            <% @plan.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+            <% end %>
+        </ul>
+        <% end %>
+        <%# 入力フォーム %>
+        <div class="mt-6">
+            <%= form_with model: @plan, class: "flex flex-col gap-4" do |f| %>
+            <div class="p-border bg-[#FBFAF7] p-5">
+                <%# 山の名前 %>
+                <div class="py-2">
+                    <p class="p-title">登山予定の山</p>
+                    <p class="text-lg">
+                        <%= @plan.mountain.name %>
+                    </p>
+                </div>
+                <%# プランタイトル %>
+                <div class="py-2">
+                    <p class="p-title">プランタイトル</p>
+                    <%= f.text_field :title, class: "p-select px-2" %>
+                </div>
+                <div class="grid grid-cols-2 gap-6 py-2">
+                    <%# 登山日 %>
+                    <div class="">
+                        <p class="p-title">登山日</p>
+                        <%= f.date_field :climbing_date, class: "w-full cursor-pointer p-select px-2", min: Date.current %>
+                    </div>
+                    <%# 同行人数 %>
+                    <div class="">
+                        <p class="p-title">同行人数</p>
+                        <div class="flex items-center justify-between p-select" data-controller="companion-count">
+                            <button type="button" class="px-4"
+                                data-action="click->companion-count#decrement">-</button>
+                            <%= f.number_field :companion_count, min: 1, class: "text-center border-0 bg-transparent focus:outline-none", data: {"companion-count-target": "input"} %>
+                            <button type="button" class="px-4"
+                                data-action="click->companion-count#increment">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%# ルート %>
+            <div class="p-border bg-[#FBFAF7] p-5">
+                <p class="pb-1">ルート</p>
+                <%= f.text_area :route, class: "p-select px-2 py-1" %>
+            </div>
+            <%# 持ち物 %>
+            <div class="p-border bg-[#FBFAF7] p-5">
+                <p class="p-border-bottom py-2">持ち物リスト</p>
+
+                <div class="grid grid-cols-2 gap-4 pt-4">
+                    <div class="flex flex-col gap-3">
+                        <%# 基本の持ち物 %>
+                        <div class="p-border-list bg-primary-1100">
+                            <p class="p-border-bottom p-2">基本の持ち物</p>
+                            <% basic_items.each_with_index do |item, index| %>
+                            <div class="p-list">
+                                <%= f.check_box :equipment, { multiple: true, checked: @plan.equipment.include?(item), id: "plan_equipment_basic_#{index}", class: "accent-primary-50" }, item, nil %>
+                                <%= label_tag "plan_equipment_basic_#{index}", item %>
+                            </div>
+                            <% end %>
+                        </div>
+
+                        <%# 服装・レイヤリング %>
+                        <details class="p-border-list p-equipment-list bg-primary-1100">
+                            <summary class="cursor-pointer p-2">
+                                服装・レイヤリング（着替え含む）
+                            </summary>
+                            <% clothing_items.each_with_index do |item, index| %>
+                            <div class="p-list">
+                                <%= f.check_box :equipment, { multiple: true, checked: @plan.equipment.include?(item), id: "plan_equipment_clothing_#{index}", class: "accent-primary-50" }, item, nil %>
+                                <%= label_tag "plan_equipment_clothing_#{index}", item %>
+                            </div>
+                            <% end %>
+                        </details>
+
+                        <%# 快適・衛生用品 %>
+                        <details class="p-border-list p-equipment-list bg-primary-1100">
+                            <summary class="cursor-pointer p-2">
+                                快適・衛生用品
+                            </summary>
+                            <% hygiene_items.each_with_index do |item, index| %>
+                            <div class="p-list">
+                                <%= f.check_box :equipment, { multiple: true, checked: @plan.equipment.include?(item), id: "plan_equipment_hygiene_#{index}", class: "accent-primary-50" }, item, nil %>
+                                <%= label_tag "plan_equipment_hygiene_#{index}", item %>
+                            </div>
+                            <% end %>
+                        </details>
+                    </div>
+
+                    <div class="flex flex-col gap-3">
+                        <%# あると安心・便利な道具 %>
+                        <details class="p-border-list p-equipment-list bg-primary-1100">
+                            <summary class="cursor-pointer p-2">
+                                あると安心・便利な道具
+                            </summary>
+                            <% convenient_items.each_with_index do |item, index| %>
+                            <div class="p-list">
+                                <%= f.check_box :equipment, { multiple: true, checked: @plan.equipment.include?(item), id: "plan_equipment_convenient_#{index}", class: "accent-primary-50" }, item, nil %>
+                                <%= label_tag "plan_equipment_convenient_#{index}", item %>
+                            </div>
+                            <% end %>
+                        </details>
+
+                        <%# 宿泊・山小屋 %>
+                        <details class="p-border-list p-equipment-list bg-primary-1100">
+                            <summary class="cursor-pointer p-equipment-list p-2">
+                                宿泊・山小屋（必要な場合）
+                            </summary>
+                            <% lodging_items.each_with_index do |item, index| %>
+                            <div class="p-list">
+                                <%= f.check_box :equipment, { multiple: true, checked: @plan.equipment.include?(item), id: "plan_equipment_lodging_#{index}", class: "accent-primary-50" }, item, nil %>
+                                <%= label_tag "plan_equipment_lodging_#{index}", item %>
+                            </div>
+                            <% end %>
+                        </details>
+                    </div>
+                </div>
+            </div>
+            <%# メモ %>
+            <div class="p-border bg-[#FBFAF7] p-5">
+                <p class="pb-1">メモ</p>
+                <%= f.text_area :note, class: "p-select px-2 py-1" %>
+            </div>
+
+            <%= f.submit "登山プランを更新", class: "p-btn" %>
+            <% end %>
+        </div>
+    </div>
+</div>

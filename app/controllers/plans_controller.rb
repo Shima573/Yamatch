@@ -25,6 +25,20 @@ class PlansController < ApplicationController
     @plan = current_user.plans.find(params[:id])
   end
 
+  def edit
+    @plan = current_user.plans.find(params[:id])
+  end
+
+  def update
+    @plan = current_user.plans.find(params[:id])
+
+    if @plan.update(plan_params)
+      redirect_to plan_path(@plan)
+    else
+      render :edit,  status: :unprocessable_entity
+    end
+  end
+
   private
 
   def plan_params
