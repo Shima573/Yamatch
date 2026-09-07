@@ -39,6 +39,12 @@ class PlansController < ApplicationController
     end
   end
 
+  def destroy
+    @plan = current_user.plans.find(params[:id])
+    @plan.destroy!
+    redirect_to plans_path, notice: "登山プランを削除しました"
+  end
+
   private
 
   def plan_params
