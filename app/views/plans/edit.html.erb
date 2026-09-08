@@ -13,7 +13,7 @@
         <% if @plan.errors.any?%>
         <ul>
             <% @plan.errors.each do |error| %>
-            <li><%= error.full_message %></li>
+            <li class="pt-1 text-primary-1000"><%= error.full_message %></li>
             <% end %>
         </ul>
         <% end %>
