@@ -15,7 +15,7 @@ class PlansController < ApplicationController
     @plan.mountain = @mountain
     # 保存する対象はPlan
     if @plan.save
-      redirect_to profile_path(current_user)
+      redirect_to plans_path, notice: "登山プランを作成しました"
     else
       render :new, status: :see_other
     end
