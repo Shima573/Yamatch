@@ -22,9 +22,9 @@
                 お住まい：
             </p>
             <% if @user.prefecture.present? %>
-                <%= @user.prefecture %>
+            <%= @user.prefecture %>
             <% else %>
-                <p>プロフィール編集からお住まいを更新してください</p>
+            <p>プロフィール編集からお住まいを更新してください</p>
             <% end %>
         </div>
 
@@ -34,22 +34,33 @@
         </div>
 
         <%# 診断スコア %>
-        <div class="user-dividing-line pt-2 pb-8"><span class="font-mincho text-xs tracking-[0.3em]">あなたの診断スコア</span></div>
+        <div class="user-dividing-line pt-2 pb-8"><span class="font-mincho text-xs tracking-[0.3em]">あなたの診断スコア</span>
+        </div>
         <div class="user-box p-4">
             <% if @diagnosis %>
-                <%= render "shared/diagnosis_score", diagnosis: @diagnosis %>
+            <%= render "shared/diagnosis_score", diagnosis: @diagnosis %>
             <% else %>
             <div class="text-center">
-                <p >相性診断後に自身のスコアが表示されます</p>
+                <p>相性診断後に自身のスコアが表示されます</p>
             </div>
             <% end %>
         </div>
         <%# 随時追加予定 %>
-        <div class="">
+        <div class="py-4">
             <%# <p>活動履歴の実装予定</p> %>
-            <div class="">
-                <%= link_to "登山プラン一覧", plans_path %>
+            <%= link_to plans_path, class: "group" do %>
+            <div class="flex items-center gap-4 myp-border p-4">
+                <%= image_tag "sample/screen.png", class: "w-15 h-15"  %>
+                <div class="">
+                    <p class="text-lg font-bold text-primary-90/70">登山プラン一覧</p>
+                    <p class="text-sm text-primary-900">登山予定・プランを確認する</p>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="text-primary-200/60 h-5 ml-auto transition-transform group-hover:translate-x-1" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
             </div>
+            <% end %>
         </div>
     </div>
 </div>

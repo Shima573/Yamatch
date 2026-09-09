@@ -1,10 +1,22 @@
 <% content_for(:title, "登山プラン詳細") %>
 <div class="min-h-screen">
     <div class="max-w-3xl mx-auto py-10 p-4">
-        <div class="p-border-bottom py-4">
+        <%= link_to plans_path, class: 'link' do %>
+        <div class="flex items-center gap-2 text-primary-900">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
+            </svg>
+            <p class="">プラン一覧に戻る</p>
+        </div>
+        <% end %>
+
+        <div class="flex items-center justify-between p-border-bottom py-4">
             <h1 class="text-2xl">登山プランの詳細</h1>
-            <%= link_to '編集', edit_plan_path(@plan), class: 'link' %>
-            <%= link_to "削除", plan_path(@plan), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
+            <div class="flex gap-4">
+                <%= link_to '編集', edit_plan_path(@plan), class: 'hover:text-primary-70' %>
+                <%= link_to "削除", plan_path(@plan), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: 'hover:text-primary-1000' %>
+            </div>
         </div>
 
         <div class="mt-6 flex flex-col gap-4">
@@ -13,7 +25,7 @@
                 <div class="py-2">
                     <p class="p-title">登山予定の山</p>
                     <p class="text-lg">
-                    <%= @plan.mountain.name %>
+                        <%= @plan.mountain.name %>
                     </p>
                 </div>
 
@@ -21,7 +33,7 @@
                 <div class="py-2">
                     <p class="p-title">プランタイトル</p>
                     <p class="p-display px-2 py-1">
-                    <%= @plan.title %>
+                        <%= @plan.title %>
                     </p>
                 </div>
 
@@ -30,7 +42,7 @@
                     <div>
                         <p class="p-title">登山日</p>
                         <p class="text-center p-display px-2 py-1">
-                        <%= @plan.climbing_date %>
+                            <%= @plan.climbing_date %>
                         </p>
                     </div>
 
@@ -38,7 +50,7 @@
                     <div>
                         <p class="p-title">同行人数</p>
                         <p class="text-center p-display px-2 py-1">
-                        <%= @plan.companion_count %>人
+                            <%= @plan.companion_count %>人
                         </p>
                     </div>
                 </div>
@@ -49,7 +61,7 @@
                 <div>
                     <p class="pb-1">ルート</p>
                     <p class="p-display">
-                    <%= @plan.route.presence || "未入力" %>
+                        <%= @plan.route.presence || "未入力" %>
                     </p>
                 </div>
             </div>
@@ -120,7 +132,7 @@
                 <div>
                     <p class="pb-1">メモ</p>
                     <p class="p-display">
-                    <%= @plan.note.presence || "未入力" %>
+                        <%= @plan.note.presence || "未入力" %>
                     </p>
                 </div>
             </div>
