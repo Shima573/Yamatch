@@ -13,7 +13,8 @@
                     <h3 class="text-3xl md:text-6xl font-bold font-mincho"><%= @mountain.name %></h3>
                 </div>
                 <!-- お気に入り -->
-                <div id="favorite_button_<%= @mountain.id %>" class="col-span-1 cursor-pointer absolute bottom-4 right-4">
+                <div id="favorite_button_<%= @mountain.id %>"
+                    class="col-span-1 cursor-pointer absolute bottom-4 right-4">
                     <%= render "shared/favorites_button", mountain: @mountain, is_favorited: @is_favorited %>
                 </div>
             </div>
@@ -231,8 +232,7 @@
                 </div>
 
                 <div class="absolute inset-0 top-10">
-                    <div
-                        class=" pt-9 text-3xl font-bold text-primary-60/80 text-center tracking-[0.15em]">
+                    <div class=" pt-9 text-3xl font-bold text-primary-60/80 text-center tracking-[0.15em]">
                         <p class="">山の物語</p>
                     </div>
                     <div class="flex items-center justify-center pt-5 pb-10 ">
@@ -321,7 +321,15 @@
         </section>
     </div>
     <%# 登山プラン作成ボタン %>
-    <div class="">
-        <%= link_to '登山プラン作成', new_mountain_plan_path(@mountain), class: 'link' %>
+    <div class="pb-8">
+        <%= link_to new_mountain_plan_path(@mountain), class: 'text-center' do %>
+        <div class="max-w-2xl mx-auto p-create-button">
+            <div
+                class="bg-[#F6DFA0] border border-[#D9C384] rounded-full py-3.5 text-center hover:bg-[#F2D68F] transition-colors">
+                <p class="text-[15px] font-bold text-[#5A4A1F]">この山で登山プランを作成する</p>
+            </div>
+        </div>
+        <% end %>
     </div>
+
 </div>

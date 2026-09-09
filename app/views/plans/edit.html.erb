@@ -1,9 +1,17 @@
 <% content_for(:title, "登山プラン編集") %>
 <div class="min-h-screen">
     <div class="max-w-3xl mx-auto py-10 p-4">
-        <div class="">
-          <%= link_to '詳細に戻る', plan_path(@plan), class: 'link' %>
+
+        <%= link_to plan_path(@plan), class: 'link' do %>
+        <div class="flex items-center gap-2 text-primary-900">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
+            </svg>
+            <p class="">詳細に戻る</p>
         </div>
+        <% end %>
+
         <%# ページタイトル %>
         <div class="p-border-bottom py-4">
             <h1 class="text-2xl">登山プランを編集</h1>
