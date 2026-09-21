@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get "plens/new"
-  get "plens/create"
   # Deviseのルーティング（これが必須）
   devise_for :users, controllers: {
     omniauth_callbacks: "users/omniauth_callbacks"
@@ -24,6 +22,7 @@ Rails.application.routes.draw do
   root "pages#top"
   get "legal/privacy"
   get "legal/terms"
+  get "/equipment_guide", to: "equipment_guides#show", as: :equipment_guide
   resources :diagnoses, only: [ :new, :create, :show ]
   resource :profile, only: [ :show, :edit, :update ]
 
