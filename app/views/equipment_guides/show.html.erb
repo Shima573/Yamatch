@@ -1,2 +1,268 @@
-<h1>EquipmentGuides#show</h1>
-<p>Find me in app/views/equipment_guides/show.html.erb</p>
+<% content_for(:title, "登山用品") %>
+
+<div class="min-h-screen">
+    <div class="max-w-5xl mx-auto pt-10 pb-10 px-7">
+
+        <%# ページタイトル・説明 %>
+        <div class="">
+            <p class="">登山用品について</p>
+            <p class="">
+                登山を安全に楽しむためには、目的や環境に合った道具選びが大切です。
+                ここでは、初心者が知っておきたい登山用品の特徴や選ぶポイントを紹介します。
+            </p>
+        </div>
+
+        <%# 登山用品一覧 %>
+        <div class="space-y-4">
+
+            <%# 登山靴 %>
+            <div class="equipment-list">
+                <div class="equipment-img">
+                    <%= image_tag "items/climbing_shoes", class: "h-40", alt: "登山靴" %>
+                </div>
+
+                <div class="equipment-text-area">
+                    <p class="equipment-title">登山靴 / トレッキングシューズ</p>
+                    <p class="pt-2">
+                        未舗装の山道や岩場、ぬかるみなどで足を保護し、
+                        滑り止めや足の疲労軽減を図るための専用靴です。
+                    </p>
+                </div>
+            </div>
+
+            <%# ザック %>
+            <div class="equipment-list">
+                <div class="equipment-img">
+                    <%= image_tag "items/rucksack", class: "h-40", alt: "ザック" %>
+                </div>
+
+                <div class="equipment-text-area">
+                    <p class="equipment-title">ザック（リュックサック）</p>
+                    <p class="pt-2">
+                        登山に必要な道具や食料などを背負って運ぶためのバッグです。
+                        荷物を安定して背負いやすいように作られており、
+                        日帰り登山では20〜35L程度が容量の目安になります。
+                    </p>
+                </div>
+            </div>
+
+            <%# レインウェア %>
+            <div class="equipment-list">
+                <div class="equipment-img">
+                    <%= image_tag "items/rainwear", class: "h-40", alt: "レインウェア" %>
+                </div>
+
+                <div class="equipment-text-area">
+                    <p class="equipment-title">レインウェア（上下セパレート）</p>
+                    <p class="pt-2">
+                        山の急な天候変化や雨風から体を守るためのウェアです。
+                        登山では動きやすい上下セパレート型が一般的で、
+                        防水性だけでなく蒸れを逃がす透湿性も選ぶポイントになります。
+                    </p>
+                </div>
+            </div>
+
+            <%# 登山用ソックス %>
+            <div class="equipment-list">
+                <div class="equipment-img">
+                    <%= image_tag "items/hiking_socks", class: "w-40 h-40", alt: "登山用ソックス" %>
+                </div>
+
+                <div class="equipment-text-area">
+                    <p class="equipment-title">登山用ソックス</p>
+                    <p class="pt-2">
+                        クッション性を高めて足への負担を和らげたり、
+                        登山靴との摩擦による靴擦れを防いだりするための靴下です。
+                        登山靴との相性や季節に合わせて、厚さや素材を選びます。
+                    </p>
+                </div>
+            </div>
+
+            <%# 帽子 %>
+            <div class="equipment-list">
+                <div class="equipment-img">
+                    <%= image_tag "items/hiking_hat", class: "w-40 h-40", alt: "帽子" %>
+                </div>
+
+                <div class="equipment-text-area">
+                    <p class="equipment-title">帽子</p>
+                    <p class="pt-2">
+                        日差しや紫外線から頭部を守り、暑い時期には熱中症対策にも役立ちます。
+                        汗をかいても乾きやすい素材や、風で飛ばされにくいものを選ぶと安心です。
+                    </p>
+                </div>
+            </div>
+
+            <%# 手袋 %>
+            <div class="equipment-list">
+                <div class="equipment-img">
+                    <%= image_tag "items/hiking_gloves", class: "w-40 h-40", alt: "手袋" %>
+                </div>
+
+                <div class="equipment-text-area">
+                    <p class="equipment-title">手袋</p>
+                    <p class="pt-2">
+                        寒さから手を守るだけでなく、岩や木などに手をついた際のケガを防ぐためにも使用します。
+                        季節や気温に合わせて、速乾性や保温性、防風性などを確認して選びます。
+                    </p>
+                </div>
+            </div>
+
+            <%# 地図・コンパス %>
+            <div class="equipment-list">
+                <div class="equipment-img">
+                    <%= image_tag "items/map_compass", class: "h-40", alt: "地図・コンパス" %>
+                </div>
+
+                <div class="equipment-text-area">
+                    <p class="equipment-title">地図・コンパス</p>
+                    <p class="pt-2">
+                        現在地や登山ルート、目的地の方向を確認するために使用します。
+                        スマートフォンのGPSアプリを利用する場合でも、
+                        バッテリー切れや故障などに備えるための重要な装備です。
+                    </p>
+                </div>
+            </div>
+
+            <%# ヘッドランプ %>
+            <div class="equipment-list">
+                <div class="equipment-img">
+                    <%= image_tag "items/headlamp", class: "h-40", alt: "ヘッドランプ" %>
+                </div>
+
+                <div class="equipment-text-area">
+                    <p class="equipment-title">ヘッドランプ</p>
+                    <p class="pt-2">
+                        暗い場所で両手を自由にしたまま、足元や周囲を照らすための照明です。
+                        日帰り登山でも、予定より下山が遅れて日没を迎える場合などに備えて携行します。
+                    </p>
+                </div>
+            </div>
+
+            <%# ファーストエイドキット %>
+            <div class="equipment-list">
+                <div class="equipment-img">
+                    <%= image_tag "items/first_aid_kit", class: "h-40", alt: "ファーストエイドキット" %>
+                </div>
+
+                <div class="equipment-text-area">
+                    <p class="equipment-title">ファーストエイドキット</p>
+                    <p class="pt-2">
+                        登山中のケガや体調不良に備えて、応急処置に必要なものをまとめたセットです。
+                        絆創膏やテーピング、普段使用している薬など、
+                        自分に必要なものを準備しておきます。
+                    </p>
+                </div>
+            </div>
+
+            <%# 速乾性インナー %>
+            <div class="equipment-list">
+                <div class="equipment-img">
+                    <%= image_tag "items/base_layer", class: "h-40", alt: "速乾性インナー" %>
+                </div>
+
+                <div class="equipment-text-area">
+                    <p class="equipment-title">速乾性インナー（ベースレイヤー）</p>
+                    <p class="pt-2">
+                        肌に直接着用し、汗を吸収・発散して身体をできるだけドライに保つためのウェアです。
+                        汗による身体の冷えを抑えるため、乾きやすい化繊やウールなどの素材が適しています。
+                    </p>
+                </div>
+            </div>
+
+            <%# 防寒着 %>
+            <div class="equipment-list">
+                <div class="equipment-img">
+                    <%= image_tag "items/middle_layer", class: "h-40", alt: "防寒着" %>
+                </div>
+
+                <div class="equipment-text-area">
+                    <p class="equipment-title">防寒着（ミドルレイヤー）</p>
+                    <p class="pt-2">
+                        標高の上昇や休憩時などに身体が冷えるのを防ぐために着用します。
+                        フリースや軽量ダウンなどがあり、
+                        季節や気温に合わせて適切なものを準備します。
+                    </p>
+                </div>
+            </div>
+
+            <%# トレッキングポール %>
+            <div class="equipment-list">
+                <div class="equipment-img">
+                    <%= image_tag "items/trekking_poles", class: "h-40", alt: "トレッキングポール" %>
+                </div>
+
+                <div class="equipment-text-area">
+                    <p class="equipment-title">トレッキングポール（登山ストック）</p>
+                    <p class="pt-2">
+                        歩行時に身体を支え、登りや下りで足への負担を軽減するために使用する杖です。
+                        特に長時間の歩行や下山時のサポートとして役立ちます。
+                    </p>
+                </div>
+            </div>
+
+            <%# ザックカバー %>
+            <div class="equipment-list">
+                <div class="equipment-img">
+                    <%= image_tag "items/cover", class: "h-40", alt: "ザックカバー" %>
+                </div>
+
+                <div class="equipment-text-area">
+                    <p class="equipment-title">ザックカバー</p>
+                    <p class="pt-2">
+                        雨が降った際にザックへ被せ、ザックや中の荷物が濡れるのを軽減するためのカバーです。
+                        使用しているザックの容量に合ったサイズを選びます。
+                    </p>
+                </div>
+            </div>
+
+            <%# ツェルト %>
+            <div class="equipment-list">
+                <div class="equipment-img">
+                    <%= image_tag "items/zelt", class: "h-40", alt: "ツェルト" %>
+                </div>
+
+                <div class="equipment-text-area">
+                    <p class="equipment-title">ツェルト（簡易テント）</p>
+                    <p class="pt-2">
+                        悪天候やケガなどで行動できなくなった場合に、
+                        雨風をしのいだり体温の低下を防いだりするために使用する簡易的なテントです。
+                        軽量でコンパクトに収納でき、緊急時の装備として利用されます。
+                    </p>
+                </div>
+            </div>
+
+            <%# サコッシュ %>
+            <div class="equipment-list">
+                <div class="equipment-img">
+                    <%= image_tag "items/sacoche", class: "h-40", alt: "サコッシュ" %>
+                </div>
+
+                <div class="equipment-text-area">
+                    <p class="equipment-title">サコッシュ / フロントバッグ</p>
+                    <p class="pt-2">
+                        スマートフォンや地図、行動食など、
+                        登山中によく使う小物をすぐ取り出せるように持ち歩くための小型バッグです。
+                    </p>
+                </div>
+            </div>
+
+            <%# インナーシーツ・寝袋 %>
+            <div class="equipment-list">
+                <div class="equipment-img">
+                    <%= image_tag "items/sleeping", class: "h-40", alt: "インナーシーツ・寝袋" %>
+                </div>
+
+                <div class="equipment-text-area">
+                    <p class="equipment-title">インナーシーツ / 寝袋</p>
+                    <p class="pt-2">
+                        山小屋泊やテント泊などで、就寝時の保温や衛生のために使用します。
+                        宿泊する場所や季節によって必要な装備が異なるため、
+                        事前に宿泊先の設備や条件を確認して準備します。
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
