@@ -1,0 +1,54 @@
+<div class="equipment-list">
+    <div class="equipment-img">
+        <%= image_tag image, class: "h-40", alt: name %>
+    </div>
+
+    <div class="equipment-text-area">
+        <h2 class="equipment-title">
+            <%= name %>
+        </h2>
+
+        <p class="pt-2">
+            <%= description %>
+        </p>
+        <% if local_assigns[:details].present? %>
+        <details class="equipment-details">
+            <summary class="equipment-summary">
+                詳しく見る
+            </summary>
+
+            <div class="equipment-details-content">
+                <div>
+                    <h3 class="font-bold mb-2">主な種類</h3>
+
+                    <div class="flex flex-wrap gap-2">
+                        <% details[:types].each do |type| %>
+                        <span class="equipment-type">
+                            <%= type %>
+                        </span>
+                        <% end %>
+                    </div>
+
+                </div>
+
+                <div class="equipment-point">
+                    <h3 class="font-bold">選ぶポイント</h3>
+
+                    <p class="mt-1">
+                        <%= details[:point] %>
+                    </p>
+                </div>
+
+                <% if details[:links].present? %>
+                <div class="flex">
+                  <h3 class="font-bold mb-2">もっと詳しく知る：</h3>
+                    <% details[:links].each do |link| %>
+                    <%= link_to link[:name], link[:url], target: "_blank", rel: "noopener noreferrer", class: "text-primary-60" %>
+                    <% end %>
+                </div>
+                <% end %>
+            </div>
+        </details>
+        <% end %>
+    </div>
+</div>

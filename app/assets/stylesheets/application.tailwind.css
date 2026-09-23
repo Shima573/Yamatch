@@ -329,4 +329,25 @@ html {
   .equipment-title {
     @apply text-2xl font-bold;
   }
+
+  .equipment-type {
+  @apply inline-block px-3 py-1 rounded-full border border-primary-900;
+}
+
+.equipment-point {
+  @apply mt-4 p-3 rounded-lg bg-primary-100;
+}
+
+.equipment-details {
+  @apply mt-3;
+}
+
+.equipment-summary {
+  @apply cursor-pointer font-bold;
+}
+
+.equipment-details-content {
+  @apply mt-4 space-y-4;
+}
+
   /* =============================== */
