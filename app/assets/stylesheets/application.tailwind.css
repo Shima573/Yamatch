@@ -335,7 +335,7 @@ html {
 }
 
 .equipment-point {
-  @apply mt-4 p-3 rounded-lg bg-primary-100;
+  @apply mt-4 p-3 rounded-lg bg-primary-1200/20;
 }
 
 .equipment-details {

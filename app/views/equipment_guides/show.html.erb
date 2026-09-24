@@ -18,22 +18,22 @@
 
     <%# 登山用品一覧 %>
     <div class="space-y-4">
-      
-          <%# ザック %>
-          <%= render "shared/equipment",
-            name: "ザック（リュックサック）",
-            image: "items/rucksack",
-            description: "登山に必要な荷物を安全かつ一括して背負い、肩や腰のベルトで重量を分散・固定して疲労を軽減します。",
-            details: {
-              types: ["小型（デイパック・20〜30L前後）", "中型（35〜50L）", "大型（50L以上）"],
-              point: "無雪期の日帰り登山であれば、20〜30L（または25〜35L）を目安に選ぶのが基本です。自分の背面長にしっかりフィットするものを選びましょう。",
-              links: [
-                {
-                  name: "ザック（リュックサック）の選び方",
-                  url: "https://www.montbell.jp/generalpage/disp.php?id=829"
-                }
-              ]
-            } %>
+
+      <%# ザック %>
+      <%= render "shared/equipment",
+        name: "ザック（リュックサック）",
+        image: "items/rucksack",
+        description: "登山に必要な荷物を安全かつ一括して背負い、肩や腰のベルトで重量を分散・固定して疲労を軽減します。",
+        details: {
+          types: ["小型（デイパック・20〜30L前後）", "中型（35〜50L）", "大型（50L以上）"],
+          point: "無雪期の日帰り登山であれば、20〜30L（または25〜35L）を目安に選ぶのが基本です。自分の背面長にしっかりフィットするものを選びましょう。",
+          links: [
+            {
+              name: "ザック（リュックサック）の選び方",
+              url: "https://www.montbell.jp/generalpage/disp.php?id=829"
+            }
+          ]
+        } %>
 
       <%# 登山靴 %>
       <%= render "shared/equipment",
@@ -162,7 +162,6 @@
             }
           ]
         } %>
-
 
       <%# 地図・コンパス %>
       <%= render "shared/equipment",

@@ -56,7 +56,13 @@
             </div>
             <%# 持ち物 %>
             <div class="p-border bg-[#FBFAF7] p-5">
-                <p class="p-border-bottom py-2">持ち物リスト</p>
+                <div class="flex justify-between p-border-bottom py-2">
+                    <p class="">持ち物リスト</p>
+                    <%= link_to equipment_guide_path, target: "_blank", rel: "noopener noreferrer", class: "text-sm text-primary-900" do %>
+                    登山用品について詳しく見る →
+                    <% end %>
+                </div>
+
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
                     <div class="flex flex-col gap-3">
