@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :plan do
-    user { nil }
-    mountain { nil }
+    association :user
+    association :mountain
     title { "MyString" }
-    climbing_date { "2026-08-03" }
+    climbing_date { Date.current }
     companion_count { 1 }
     route { "MyText" }
     equipment { "MyText" }
