@@ -13,5 +13,18 @@ RSpec.describe Plan, type: :model do
       # ③ titleのエラーメッセージを検証する
       expect(plan.errors[:title]).to include("は50文字以内で入力してください")
     end
+
+    it "登山予定日が未入力の場合、Planが無効になる" do
+      expect(FactoryBot.build(:plan, climbing_date: nil )).not_to be_valid
+    end
+
+    it "登山予定日が過去の場合は無効" do
+      expect(FactoryBot.build(:plan, climbing_date: Date.current - 1)).not_to be_valid
+    end
+
+    it "登山予定日が今日の場合は有効である" do
+      expect(FactoryBot.build(:plan)).to be_valid
+    end
+
   end
 end
