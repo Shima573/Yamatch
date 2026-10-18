@@ -26,5 +26,14 @@ RSpec.describe Plan, type: :model do
       expect(FactoryBot.build(:plan)).to be_valid
     end
 
+    it "同行人数が1人の場合は有効" do
+      expect(FactoryBot.build(:plan, companion_count: 1)).to be_valid
+    end
+    it "同行人数が0人の場合は無効" do
+      expect(FactoryBot.build(:plan, companion_count: 0)).not_to be_valid
+    end
+    it "同行人数が未入力の場合は無効" do
+      expect(FactoryBot.build(:plan, companion_count: nil)).not_to be_valid
+    end
   end
 end
