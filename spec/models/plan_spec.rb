@@ -15,7 +15,7 @@ RSpec.describe Plan, type: :model do
     end
 
     it "登山予定日が未入力の場合、Planが無効になる" do
-      expect(FactoryBot.build(:plan, climbing_date: nil )).not_to be_valid
+      expect(FactoryBot.build(:plan, climbing_date: nil)).not_to be_valid
     end
 
     it "登山予定日が過去の場合は無効" do
@@ -37,19 +37,19 @@ RSpec.describe Plan, type: :model do
     end
 
     it "ルート内容が300文字の場合は有効である" do
-      expect(FactoryBot.build(:plan, route: "b" * 300 )).to be_valid
+      expect(FactoryBot.build(:plan, route: "b" * 300)).to be_valid
     end
     it "ルート内容が301文字の場合は無効である" do
-      plan = FactoryBot.build(:plan, route: "b" * 301 )
+      plan = FactoryBot.build(:plan, route: "b" * 301)
       plan.valid?
       expect(plan.errors[:route]).to include("は300文字以内で入力してください")
     end
 
     it "メモ内容が500文字の場合は有効である" do
-      expect(FactoryBot.build(:plan, note: "c" * 500 )).to be_valid
+      expect(FactoryBot.build(:plan, note: "c" * 500)).to be_valid
     end
     it "メモ内容が501文字の場合は無効である" do
-      plan = FactoryBot.build(:plan, note: "b" * 501 )
+      plan = FactoryBot.build(:plan, note: "b" * 501)
       plan.valid?
       expect(plan.errors[:note]).to include("は500文字以内で入力してください")
     end
