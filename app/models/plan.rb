@@ -6,7 +6,7 @@ class Plan < ApplicationRecord
   validates :title, length: { maximum: 50 }
   validates :climbing_date, presence: true
   validate :climbing_date_cannot_be_in_past
-  validates :companion_count, numericality: { minimum: 1 }
+  validates :companion_count, numericality: { greater_than_or_equal_to: 1 }
   validates :route, length: { maximum: 300 }
   validates :note, length: { maximum: 500 }
 
