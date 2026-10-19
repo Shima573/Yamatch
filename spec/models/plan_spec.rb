@@ -35,5 +35,14 @@ RSpec.describe Plan, type: :model do
     it "同行人数が未入力の場合は無効" do
       expect(FactoryBot.build(:plan, companion_count: nil)).not_to be_valid
     end
+
+    it "ルート内容が300文字の場合は有効である" do
+      expect(FactoryBot.build(:plan, route: "b" * 300 )).to be_valid
+    end
+    it "ルート内容が301文字の場合は無効である" do
+      plan = FactoryBot.build(:plan, route: "b" * 301 )
+      plan.valid?
+      expect(plan.errors[:route]).to include("は300文字以内で入力してください")
+    end
   end
 end
