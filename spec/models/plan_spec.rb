@@ -44,5 +44,14 @@ RSpec.describe Plan, type: :model do
       plan.valid?
       expect(plan.errors[:route]).to include("は300文字以内で入力してください")
     end
+
+    it "メモ内容が500文字の場合は有効である" do
+      expect(FactoryBot.build(:plan, note: "c" * 500 )).to be_valid
+    end
+    it "メモ内容が501文字の場合は無効である" do
+      plan = FactoryBot.build(:plan, note: "b" * 501 )
+      plan.valid?
+      expect(plan.errors[:note]).to include("は500文字以内で入力してください")
+    end
   end
 end
