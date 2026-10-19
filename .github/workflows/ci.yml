@@ -80,6 +80,9 @@ jobs:
       - name: Build CSS
         run: yarn build:css
 
+      - name: Build JavaScript
+        run: yarn build
+
       - name: Run tests
         env:
           RAILS_ENV: test
