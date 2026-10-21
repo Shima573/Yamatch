@@ -52,7 +52,7 @@ RSpec.describe "Plans", type: :request do
         }
       }.not_to change(Plan, :count)
 
-      expect(response).to have_http_status(:see_other)
+      expect(response).to have_http_status(:unprocessable_entity)
     end
   end
 end
