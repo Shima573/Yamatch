@@ -168,7 +168,7 @@ class Mountain < ApplicationRecord
 
   private
 
-  # rawデータを元に正規化スコアを算出するロジック
+  # すでに山に設定されている難易度データを、比較しやすい数値へ変換する処理
   def set_normalized_scores
     # 体力度: 1-10 の数値を 10-100 のスコアに変換
     self.normalized_physical_score = raw_physical_grade * 10 if raw_physical_grade.present?

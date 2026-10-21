@@ -17,7 +17,7 @@ class PlansController < ApplicationController
     if @plan.save
       redirect_to plans_path, notice: "登山プランを作成しました"
     else
-      render :new, status: :see_other
+      render :new, status: :unprocessable_entity
     end
   end
 
