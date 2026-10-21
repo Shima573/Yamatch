@@ -1,7 +1,4 @@
 class ProfilesController < ApplicationController
-  # ログインしていない場合はログイン画面へ飛ばす
-  before_action :authenticate_user!
-
   def show
     # resources :profiles の場合は params[:id] が必要ですが、
     # マイページとして使う場合は current_user を基本にします
@@ -21,7 +18,7 @@ class ProfilesController < ApplicationController
     if @user.update(profile_params)
       redirect_to profile_path
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 

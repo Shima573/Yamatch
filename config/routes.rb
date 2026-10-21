@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   get "legal/privacy"
   get "legal/terms"
   get "/equipment_guide", to: "equipment_guides#show", as: :equipment_guide
+  get "diagnoses/result", to: "diagnoses#show", as: :diagnosis_result
+
   resources :diagnoses, only: [ :new, :create, :show ]
   resource :profile, only: [ :show, :edit, :update ]
 

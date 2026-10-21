@@ -17,14 +17,16 @@ class DiagnosesController < ApplicationController
     else
       # 未ログインならセッションにハッシュとして保存
       session[:pending_diagnosis] = @diagnosis.attributes.except("id", "created_at", "updated_at")
-      @recommended_mountains = Mountain.recommend_for(@diagnosis)
-      render :show, status: :see_other
+      redirect_to diagnosis_result_path, status: :see_other
     end
   end
 
   def show
     if params[:id]
-      @diagnosis = Diagnosis.find(params[:id])
+      # ① ログイン状態を確認する、# ② 未ログインならログイン画面へ移動する
+      authenticate_user!
+      # ③ ログイン済みなら本人の診断結果を取得する
+      @diagnosis = current_user.diagnoses.find(params[:id])
     elsif session[:pending_diagnosis]
       @diagnosis = Diagnosis.new(session[:pending_diagnosis])
     else
