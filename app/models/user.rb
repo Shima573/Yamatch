@@ -69,5 +69,7 @@ class User < ApplicationRecord
 
   # ファイルの種類とサイズのバリデーション（gem ActiveStorage Validationを使用）
   ACCEPTED_CONTENT_TYPES = %w[image/jpeg image/png image/gif image/webp].freeze
-  validates :avatar, content_type: ACCEPTED_CONTENT_TYPES, size: { less_than_or_equal_to: 5.megabytes }
+  validates :avatar,
+            content_type: ACCEPTED_CONTENT_TYPES,
+            size: { less_than_or_equal_to: 5.megabytes }
 end
