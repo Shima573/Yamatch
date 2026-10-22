@@ -261,7 +261,7 @@ RSpec.describe User, type: :model do
       expect(user).to be_valid
     end
 
-    it 'ファイルサイズがMBをわずかに超えただけでも無効であること' do
+    it 'ファイルサイズが5MBをわずかに超えただけでも無効であること' do
       user = build(:user)
 
       user.avatar.attach(
