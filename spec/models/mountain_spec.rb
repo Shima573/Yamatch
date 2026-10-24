@@ -108,6 +108,125 @@ RSpec.describe Mountain, type: :model do
 
       expect(Mountain.recommend_for(diagnosis)).to eq([mountain])
     end
+
+    it 'perfectが2件、easyが1件の場合は優先順位どおりに3件返すこと' do
+      diagnosis = build(
+        :diagnosis,
+        recommended_physical_min: 4,
+        recommended_physical_max: 6,
+        recommended_technical_max: 2
+      )
+
+      perfect1 = create(:mountain, raw_physical_grade: 5, raw_technical_grade: :A)
+      perfect2 = create(:mountain, raw_physical_grade: 4, raw_technical_grade: :B)
+      easy = create(:mountain, raw_physical_grade: 3, raw_technical_grade: :A)
+
+      # ここにexpectを書く
+      expect(Mountain.recommend_for(diagnosis)).to eq([perfect2, perfect1, easy])
+    end
+
+    it '診断結果の技術度上限を超える山はおすすめに含まれないこと' do
+      diagnosis = build(
+        :diagnosis,
+        recommended_physical_min: 4,
+        recommended_physical_max: 6,
+        recommended_technical_max: 2
+      )
+
+      mountain_a = create(:mountain, raw_physical_grade: 5, raw_technical_grade: :A)
+      mountain_c = create(:mountain, raw_physical_grade: 5, raw_technical_grade: :C)
+
+      # ここにexpectを書く
+      expect(Mountain.recommend_for(diagnosis)).to eq([mountain_a])
+    end
+
+    it 'おすすめ候補が4件以上あっても、返す山は最大3件になること' do
+      diagnosis = build(
+        :diagnosis,
+        recommended_physical_min: 4,
+        recommended_physical_max: 6,
+        recommended_technical_max: 2
+      )
+      create(:mountain, raw_physical_grade: 5, raw_technical_grade: :A)
+      create(:mountain, raw_physical_grade: 4, raw_technical_grade: :B)
+      create(:mountain, raw_physical_grade: 4, raw_technical_grade: :A)
+      easy = create(:mountain, raw_physical_grade: 3, raw_technical_grade: :A)
+
+      result = Mountain.recommend_for(diagnosis)
+
+      # おすすめが3件であること
+      expect(result.size).to eq(3)
+      # 最初の2件がperfectであること、おすすめ結果の先頭2件が、どちらもperfectに分類されること
+      expect(result.first(2)).to all(satisfy { |mountain|
+        mountain.recommendation_type(diagnosis) == :perfect
+      })
+      # 最後の1件がeasyであること
+      expect(result.last).to eq(easy)
+    end
+
+    it 'perfectとeasyが不足している場合はchallengeで補充すること' do
+      diagnosis = build(
+        :diagnosis,
+        recommended_physical_min: 4,
+        recommended_physical_max: 6,
+        recommended_technical_max: 2
+      )
+
+      perfect1 = create(:mountain, raw_physical_grade: 5, raw_technical_grade: :A)
+      challenge1 = create(:mountain, raw_physical_grade: 7, raw_technical_grade: :A)
+      challenge2 = create(:mountain, raw_physical_grade: 8, raw_technical_grade: :B)
+
+      # ここにexpectを書く
+      expect(Mountain.recommend_for(diagnosis)).to eq([perfect1, challenge1, challenge2])
+    end
+
+    it 'perfectが複数ある場合は体力度が低い山を優先すること' do
+      diagnosis = build(
+        :diagnosis,
+        recommended_physical_min: 4,
+        recommended_physical_max: 6,
+        recommended_technical_max: 2
+      )
+
+      mountain_high = create(:mountain, raw_physical_grade: 6, raw_technical_grade: :A)
+      mountain_middle = create(:mountain, raw_physical_grade: 5, raw_technical_grade: :A)
+      mountain_low = create(:mountain, raw_physical_grade: 4, raw_technical_grade: :A)
+
+      expect(Mountain.recommend_for(diagnosis)).to eq([mountain_low, mountain_middle, mountain_high])
+    end
+
+    it 'easyが複数ある場合は体力度が高い山を優先すること' do
+      diagnosis = build(
+        :diagnosis,
+        recommended_physical_min: 4,
+        recommended_physical_max: 6,
+        recommended_technical_max: 2
+      )
+
+      easy1 = create(:mountain, raw_physical_grade: 1, raw_technical_grade: :A)
+      easy2 = create(:mountain, raw_physical_grade: 2, raw_technical_grade: :A)
+      easy3 = create(:mountain, raw_physical_grade: 3, raw_technical_grade: :A)
+
+      expect(Mountain.recommend_for(diagnosis)).to eq([easy3, easy2, easy1])
+    end
+
+    it '候補が20件を超えてもperfectの山をおすすめできること' do
+      diagnosis = build(
+        :diagnosis,
+        recommended_physical_min: 4,
+        recommended_physical_max: 6,
+        recommended_technical_max: 2
+      )
+
+      20.times do
+        create(:mountain, raw_physical_grade: 10, raw_technical_grade: :A)
+      end
+
+      perfect = create(:mountain, raw_physical_grade: 5, raw_technical_grade: :A)
+
+      expect(Mountain.recommend_for(diagnosis)).to include(perfect)
+    end
+
   end
 
 end
