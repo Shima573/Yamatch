@@ -121,7 +121,6 @@ RSpec.describe Mountain, type: :model do
       perfect2 = create(:mountain, raw_physical_grade: 4, raw_technical_grade: :B)
       easy = create(:mountain, raw_physical_grade: 3, raw_technical_grade: :A)
 
-      # ここにexpectを書く
       expect(Mountain.recommend_for(diagnosis)).to eq([perfect2, perfect1, easy])
     end
 
@@ -136,7 +135,6 @@ RSpec.describe Mountain, type: :model do
       mountain_a = create(:mountain, raw_physical_grade: 5, raw_technical_grade: :A)
       mountain_c = create(:mountain, raw_physical_grade: 5, raw_technical_grade: :C)
 
-      # ここにexpectを書く
       expect(Mountain.recommend_for(diagnosis)).to eq([mountain_a])
     end
 
@@ -176,7 +174,6 @@ RSpec.describe Mountain, type: :model do
       challenge1 = create(:mountain, raw_physical_grade: 7, raw_technical_grade: :A)
       challenge2 = create(:mountain, raw_physical_grade: 8, raw_technical_grade: :B)
 
-      # ここにexpectを書く
       expect(Mountain.recommend_for(diagnosis)).to eq([perfect1, challenge1, challenge2])
     end
 
@@ -227,6 +224,78 @@ RSpec.describe Mountain, type: :model do
       expect(Mountain.recommend_for(diagnosis)).to include(perfect)
     end
 
+    it '条件に合う山が存在しない場合は空配列を返すこと' do
+      diagnosis = build(
+        :diagnosis,
+        recommended_physical_min: 4,
+        recommended_physical_max: 6,
+        recommended_technical_max: 2
+      )
+
+      create(:mountain, raw_physical_grade: 5, raw_technical_grade: :C)
+
+      expect(Mountain.recommend_for(diagnosis)).to eq([])
+    end
+  end
+
+  describe '#distance_from' do
+    it 'ユーザーの都道府県が未設定の場合はnilを返すこと' do
+      user = build(:user, prefecture: nil)
+      mountain = build(:mountain)
+
+      expect(mountain.distance_from(user)).to be_nil
+    end
+
+    it 'ユーザーの都道府県が位置情報に登録されていない場合はnilを返すこと' do
+      user = build(:user, prefecture: '存在しない都道府県')
+      mountain = build(:mountain)
+
+      expect(mountain.distance_from(user)).to be_nil
+    end
+
+    it 'ユーザーと山の座標が同じ場合は距離が0kmになること' do
+      user = build(:user, prefecture: '東京都')
+
+      location = Mountain::PREFECTURE_LOCATIONS['東京都']
+
+      mountain = build(
+        :mountain,
+        latitude: location[:lat],
+        longitude: location[:lng]
+      )
+
+      expect(mountain.distance_from(user)).to be_within(0.001).of(0)
+    end
+
+    it 'ユーザーと山の座標が異なる場合は正しい距離を返すこと' do
+      user = build(:user, prefecture: '東京都')
+
+      location = Mountain::PREFECTURE_LOCATIONS['東京都']
+
+      mountain = build(
+        :mountain,
+        latitude: location[:lat] + 1,
+        longitude: location[:lng]
+      )
+
+      expect(mountain.distance_from(user)).to be_within(1).of(111)
+    end
+  end
+
+  describe '#prefecture_location' do
+    it '登録されている都道府県の位置情報を返すこと' do
+      mountain = build(:mountain)
+
+      location = Mountain::PREFECTURE_LOCATIONS['東京都']
+
+      expect(mountain.prefecture_location('東京都')).to eq(location)
+    end
+
+    it '登録されていない都道府県の場合はnilを返すこと' do
+      mountain = build(:mountain)
+
+      expect(mountain.prefecture_location('存在しない都道府県')).to be_nil
+    end
   end
 
 end
