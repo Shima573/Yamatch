@@ -298,4 +298,42 @@ RSpec.describe Mountain, type: :model do
     end
   end
 
+  describe '#technical_rank_score' do
+    it '技術度がCの場合は3を返すこと' do
+      mountain = build(:mountain, raw_technical_grade: :C)
+
+      expect(mountain.technical_rank_score).to eq(3)
+    end
+
+    it '技術度がAの場合は1を返すこと' do
+      mountain = build(:mountain, raw_technical_grade: :A)
+
+      expect(mountain.technical_rank_score).to eq(1)
+    end
+
+    it '技術度がEの場合は5を返すこと' do
+      mountain = build(:mountain, raw_technical_grade: :E)
+
+      expect(mountain.technical_rank_score).to eq(5)
+    end
+  end
+
+  describe 'before_save' do
+    it '技術度を変更して保存すると正規化スコアも更新されること' do
+      mountain = create(:mountain, raw_technical_grade: :A)
+
+      mountain.update!(raw_technical_grade: :E)
+
+      expect(mountain.reload.normalized_technical_score).to eq(5)
+    end
+
+    it '体力度を変更して保存すると正規化スコアも更新されること' do
+      mountain = create(:mountain, raw_physical_grade: 3)
+
+      mountain.update!(raw_physical_grade: 7)
+
+      expect(mountain.reload.normalized_physical_score).to eq(70)
+    end
+  end
+
 end
