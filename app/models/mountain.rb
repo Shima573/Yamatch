@@ -73,7 +73,6 @@ class Mountain < ApplicationRecord
     # メインの検索
     mountains = where(normalized_technical_score: ..diagnosis.recommended_technical_max)
                 .order(normalized_physical_score: :desc)
-                .limit(20)
                 .to_a
 
     perfect = []
@@ -91,6 +90,9 @@ class Mountain < ApplicationRecord
         challenge << mountain
       end
     end
+
+    perfect.sort_by!(&:normalized_physical_score)
+    challenge.sort_by!(&:normalized_physical_score)
 
     result = []
     result += perfect.first(2)

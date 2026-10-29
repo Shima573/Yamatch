@@ -26,9 +26,15 @@ class Diagnosis < ApplicationRecord
 
     # Diagnosisオブジェクトの作成
     new(
+      # 体力度と技術度の合計スコア
       total_score: (physical_total + technical_total),
+      # 体力度の推奨範囲を設定（診断結果の±1段階）
+      # 最小値が1を下回らないようにする
       recommended_physical_min: [ (physical_grade - 1), 1 ].max,
+      # 最大値が10を超えないようにする
       recommended_physical_max: [ (physical_grade + 1), 10 ].min,
+      # 技術度は診断結果をそのまま上限として設定
+      # ユーザーの技術度を超える山はおすすめ候補から除外する
       recommended_technical_max: technical_grade
     )
   end
