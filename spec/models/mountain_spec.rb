@@ -106,7 +106,7 @@ RSpec.describe Mountain, type: :model do
         raw_technical_grade: :A
       )
 
-      expect(Mountain.recommend_for(diagnosis)).to eq([mountain])
+      expect(Mountain.recommend_for(diagnosis)).to eq([ mountain ])
     end
 
     it 'perfectが2件、easyが1件の場合は優先順位どおりに3件返すこと' do
@@ -121,7 +121,7 @@ RSpec.describe Mountain, type: :model do
       perfect2 = create(:mountain, raw_physical_grade: 4, raw_technical_grade: :B)
       easy = create(:mountain, raw_physical_grade: 3, raw_technical_grade: :A)
 
-      expect(Mountain.recommend_for(diagnosis)).to eq([perfect2, perfect1, easy])
+      expect(Mountain.recommend_for(diagnosis)).to eq([ perfect2, perfect1, easy ])
     end
 
     it '診断結果の技術度上限を超える山はおすすめに含まれないこと' do
@@ -135,7 +135,7 @@ RSpec.describe Mountain, type: :model do
       mountain_a = create(:mountain, raw_physical_grade: 5, raw_technical_grade: :A)
       mountain_c = create(:mountain, raw_physical_grade: 5, raw_technical_grade: :C)
 
-      expect(Mountain.recommend_for(diagnosis)).to eq([mountain_a])
+      expect(Mountain.recommend_for(diagnosis)).to eq([ mountain_a ])
     end
 
     it 'おすすめ候補が4件以上あっても、返す山は最大3件になること' do
@@ -174,7 +174,7 @@ RSpec.describe Mountain, type: :model do
       challenge1 = create(:mountain, raw_physical_grade: 7, raw_technical_grade: :A)
       challenge2 = create(:mountain, raw_physical_grade: 8, raw_technical_grade: :B)
 
-      expect(Mountain.recommend_for(diagnosis)).to eq([perfect1, challenge1, challenge2])
+      expect(Mountain.recommend_for(diagnosis)).to eq([ perfect1, challenge1, challenge2 ])
     end
 
     it 'perfectが複数ある場合は体力度が低い山を優先すること' do
@@ -189,7 +189,7 @@ RSpec.describe Mountain, type: :model do
       mountain_middle = create(:mountain, raw_physical_grade: 5, raw_technical_grade: :A)
       mountain_low = create(:mountain, raw_physical_grade: 4, raw_technical_grade: :A)
 
-      expect(Mountain.recommend_for(diagnosis)).to eq([mountain_low, mountain_middle, mountain_high])
+      expect(Mountain.recommend_for(diagnosis)).to eq([ mountain_low, mountain_middle, mountain_high ])
     end
 
     it 'easyが複数ある場合は体力度が高い山を優先すること' do
@@ -204,7 +204,7 @@ RSpec.describe Mountain, type: :model do
       easy2 = create(:mountain, raw_physical_grade: 2, raw_technical_grade: :A)
       easy3 = create(:mountain, raw_physical_grade: 3, raw_technical_grade: :A)
 
-      expect(Mountain.recommend_for(diagnosis)).to eq([easy3, easy2, easy1])
+      expect(Mountain.recommend_for(diagnosis)).to eq([ easy3, easy2, easy1 ])
     end
 
     it '候補が20件を超えてもperfectの山をおすすめできること' do
@@ -336,4 +336,28 @@ RSpec.describe Mountain, type: :model do
     end
   end
 
+  describe 'Association' do
+    it '山を削除すると関連するお気に入りも削除されること' do
+      mountain = create(:mountain)
+      user = create(:user)
+      create(:favorite, mountain: mountain, user: user)
+
+      # ここにexpectを書く
+      expect {
+        mountain.destroy!
+      }.to change(Favorite, :count).by(-1)
+    end
+
+    it '山を削除すると関連する活動記録も削除されること' do
+      mountain = create(:mountain)
+      user = create(:user)
+
+      create(:activity_record, mountain: mountain, user: user)
+
+      # ここにexpectを書く
+      expect {
+        mountain.destroy!
+      }.to change(ActivityRecord, :count).by(-1)
+    end
+  end
 end
