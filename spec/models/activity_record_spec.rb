@@ -25,4 +25,60 @@ RSpec.describe ActivityRecord, type: :model do
       expect(activity_record.errors[:base]).to include("画像は3枚までです")
     end
   end
+
+  describe 'titleのバリデーション' do
+    it 'タイトルが未入力の場合は無効になること' do
+      activity_record = build(:activity_record, title: nil)
+
+      # ① 無効であることを確認する
+      expect(activity_record).not_to be_valid
+
+      # ② titleのエラーメッセージを確認する
+      expect(activity_record.errors[:title]).to include("を入力してください")
+    end
+  end
+
+  describe 'bodyのバリデーション' do
+    it '本文が500文字の場合は有効になること' do
+      activity_record = build(:activity_record, body: "あ" * 500)
+
+      expect(activity_record).to be_valid
+    end
+
+    it '本文が501文字の場合は無効になること' do
+      activity_record = build(:activity_record, body: "あ" * 501)
+
+      # ① 無効であることを確認する
+      expect(activity_record).not_to be_valid
+      # ② bodyのエラーメッセージを確認する
+      expect(activity_record.errors[:body]).to include("は500文字以内で入力してください")
+    end
+  end
+
+  describe 'climbed_atのバリデーション' do
+    it '登山日が未入力の場合は無効になること' do
+      activity_record = build(:activity_record, climbed_at: nil)
+
+      # ① 無効であることを確認する
+      expect(activity_record).not_to be_valid
+
+      # ② climbed_atのエラーメッセージを確認する
+      # puts activity_record.errors.full_messages
+      expect(activity_record.errors[:climbed_at]).to include("を入力してください")
+    end
+
+    it '登山日が過去の場合は有効になること' do
+      activity_record = build(:activity_record, climbed_at: 1.day.ago)
+
+      expect(activity_record).to be_valid
+    end
+
+    it '登山日が今日の場合は有効になること' do
+      activity_record = build(:activity_record, climbed_at: Time.current.beginning_of_day)
+
+      expect(activity_record).to be_valid
+    end
+  end
+
+
 end
