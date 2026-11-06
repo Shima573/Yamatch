@@ -80,5 +80,36 @@ RSpec.describe ActivityRecord, type: :model do
     end
   end
 
+  describe 'photos_limitのバリデーション' do
+    it '画像が3枚の場合は有効になること' do
+      activity_record = build(:activity_record)
+
+      3.times do
+        photo = activity_record.photos.build
+        # ここでphotoに画像を添付する
+        file = Rack::Test::UploadedFile.new(
+          StringIO.new('a' * 5.megabytes),
+          'image/png',
+          original_filename: 'large_image.png'
+        )
+        photo.image.attach(file)
+      end
+
+      # ここにexpectを書く
+      expect(activity_record.photos.length).to eq(3)
+      expect(activity_record).to be_valid
+    end
+
+    it '画像が0枚の場合は有効になること' do
+      activity_record = build(:activity_record)
+
+      # ここにexpectを書く
+      expect(activity_record.photos.length).to eq(0)
+      expect(activity_record).to be_valid
+    end
+
+
+  end
+
 
 end
